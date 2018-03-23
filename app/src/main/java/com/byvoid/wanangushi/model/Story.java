@@ -11,6 +11,8 @@ import java.io.Serializable;
 public class Story implements Serializable{
     private static final long serialVersionUID = 2540300759677642120L;
 
+    @SerializedName("id")
+    private int mId;
     @SerializedName("name")
     private String mName;
     @SerializedName("cover")
@@ -20,8 +22,8 @@ public class Story implements Serializable{
         return mName;
     }
 
-    public void setName(String mName) {
-        this.mName = mName;
+    public void setName(String name) {
+        this.mName = name;
     }
 
     public String getCoverUrl() {
@@ -30,5 +32,13 @@ public class Story implements Serializable{
 
     public void setCoverUrl(String coverUrl) {
         this.mCoverUrl = coverUrl;
+    }
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int id) {
+        this.mId = id;
     }
 }

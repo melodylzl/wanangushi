@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingEnd="48dp"
+    android:paddingTop="20dp">
+
+    <TextView
+        android:id="@+id/userNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/userHeadIv"
+        android:textColor="@color/cl_666"
+        android:textSize="14sp"
+        tools:text="用户昵称" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/userHeadIv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/icon_avatar"
+        app:riv_corner_radius="4dp" />
+
+
+    <TextView
+        android:id="@+id/textTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userNameTv"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/userHeadIv"
+        android:background="@drawable/bubble_l"
+        android:paddingBottom="7dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="15dp"
+        android:paddingTop="7dp"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imageIv"
+        android:layout_width="180dp"
+        android:layout_height="111dp"
+        android:layout_below="@+id/userNameTv"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/userHeadIv"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="10dp" />
+
+
+</RelativeLayout>

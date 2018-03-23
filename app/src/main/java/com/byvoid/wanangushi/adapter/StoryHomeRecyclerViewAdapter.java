@@ -20,7 +20,7 @@ import java.util.List;
  * @author melody
  * @date 2018/3/21
  */
-public class StoryHomeRecyclerViewAdapter extends RecyclerView.Adapter implements View.OnClickListener{
+public class StoryHomeRecyclerViewAdapter extends RecyclerView.Adapter{
 
     private Context mContext;
     private List<Story> mList;
@@ -40,29 +40,22 @@ public class StoryHomeRecyclerViewAdapter extends RecyclerView.Adapter implement
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
-        Story story = mList.get(position);
+        final Story story = mList.get(position);
         viewHolder.mStoryNameTv.setText(story.getName());
         ViewUtils.refreshHeight(viewHolder.itemView, SizeUtils.dp2px(200 + (position % 5) * 60));
         Glide.with(mContext).load(R.mipmap.flipbg10).into(viewHolder.mStoryCoverIv);
 
-        viewHolder.itemView.setOnClickListener(this);
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StoryActivity.startToMe(mContext,story.getId());
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return mList.size();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.id_item_story_home:
-                StoryActivity.startToMe(mContext,StoryActivity.class);
-                break;
-            default:
-                break;
-        }
-
     }
 
     private static class ViewHolder extends RecyclerView.ViewHolder{
