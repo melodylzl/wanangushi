@@ -21,7 +21,6 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
-import com.readystatesoftware.chuck.internal.support.JsonConvertor;
 
 import java.io.Reader;
 import java.lang.reflect.Type;
@@ -73,23 +72,4 @@ public class Convert {
         return create().toJson(src, typeOfSrc);
     }
 
-    public static String formatJson(String json) {
-        try {
-            JsonParser jp = new JsonParser();
-            JsonElement je = jp.parse(json);
-            return JsonConvertor.getInstance().toJson(je);
-        } catch (Exception e) {
-            return json;
-        }
-    }
-
-    public static String formatJson(Object src) {
-        try {
-            JsonParser jp = new JsonParser();
-            JsonElement je = jp.parse(toJson(src));
-            return JsonConvertor.getInstance().toJson(je);
-        } catch (Exception e) {
-            return e.getMessage();
-        }
-    }
 }

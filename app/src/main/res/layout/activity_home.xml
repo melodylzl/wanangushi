@@ -30,31 +30,7 @@
             android:padding="5dp"
             app:tabIconNormal="@mipmap/home_normal"
             app:tabIconSelected="@mipmap/home_selected"
-            app:tabText="微信"
-            app:tabTextSize="13sp"
-            app:textColorNormal="#999999"
-            app:textColorSelected="#46c01b" />
-
-        <com.yinglan.alphatabs.AlphaTabView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="5dp"
-            app:tabIconNormal="@mipmap/category_normal"
-            app:tabIconSelected="@mipmap/category_selected"
-            app:tabText="通讯录"
-            app:tabTextSize="13sp"
-            app:textColorNormal="#999999"
-            app:textColorSelected="#46c01b" />
-
-        <com.yinglan.alphatabs.AlphaTabView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="5dp"
-            app:tabIconNormal="@mipmap/service_normal"
-            app:tabIconSelected="@mipmap/service_selected"
-            app:tabText="发现"
+            app:tabText="故事"
             app:tabTextSize="13sp"
             app:textColorNormal="#999999"
             app:textColorSelected="#46c01b" />

@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 
 import com.byvoid.wanangushi.R;
 import com.byvoid.wanangushi.base.BaseActivity;
+import com.byvoid.wanangushi.fragment.StoryHomeFragment;
 import com.byvoid.wanangushi.fragment.TextFragment;
 import com.yinglan.alphatabs.AlphaTabsIndicator;
 
@@ -44,10 +45,6 @@ public class HomeActivity extends BaseActivity{
         mViewPager.addOnPageChangeListener(mainAdapter);
 
         mAlphaTabsIndicator.setViewPager(mViewPager);
-        mAlphaTabsIndicator.getTabView(0).showNumber(6);
-        mAlphaTabsIndicator.getTabView(1).showNumber(888);
-        mAlphaTabsIndicator.getTabView(2).showNumber(88);
-        mAlphaTabsIndicator.getTabView(3).showPoint();
     }
 
     @Override
@@ -59,14 +56,12 @@ public class HomeActivity extends BaseActivity{
     private class MainAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
 
         private List<Fragment> fragments = new ArrayList<>();
-        private String[] titles = {"微信", "通讯录", "发现", "我"};
+        private String[] titles = {"故事", "我"};
 
         public MainAdapter(FragmentManager fm) {
             super(fm);
-            fragments.add(TextFragment.newInstance(titles[0]));
+            fragments.add(StoryHomeFragment.newInstance());
             fragments.add(TextFragment.newInstance(titles[1]));
-            fragments.add(TextFragment.newInstance(titles[2]));
-            fragments.add(TextFragment.newInstance(titles[3]));
         }
 
         @Override
