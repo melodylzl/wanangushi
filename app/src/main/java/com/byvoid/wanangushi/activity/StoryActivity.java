@@ -51,14 +51,22 @@ public class StoryActivity extends BaseActivity{
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
+        List<String> photoUrlList = new ArrayList<>();
+        photoUrlList.add("https://ws1.sinaimg.cn/large/610dc034ly1fp9qm6nv50j20u00miacg.jpg");
+        photoUrlList.add("http://7xi8d6.com1.z0.glb.clouddn.com/20180208080314_FhzuAJ_Screenshot.jpeg");
+        photoUrlList.add("http://7xi8d6.com1.z0.glb.clouddn.com/20180129074038_O3ydq4_Screenshot.jpeg");
+
         List<StoryContent> storyContentList = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < 20; ++i){
             StoryContent storyContent = new StoryContent();
+            storyContent.setId(i);
             storyContent.setType(random.nextInt(3));
+            if (storyContent.getType() != 0){
+                storyContent.setContentType(random.nextInt(2));
+            }
             storyContent.setContent("We take a minute to have a crush on some");
-            storyContent.setContentType(random.nextInt(2));
-            storyContent.setImageUrl("https://user-gold-cdn.xitu.io/2018/3/6/161f995954b02780?imageView2/0/w/1280/h/960/format/webp/ignore-error/1");
+            storyContent.setImageUrl(photoUrlList.get(new Random().nextInt(3)));
             User user = new User();
             user.setUid(1000);
             user.setName("melody");

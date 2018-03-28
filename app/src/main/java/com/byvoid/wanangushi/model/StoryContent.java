@@ -13,6 +13,8 @@ public class StoryContent implements Serializable{
     public static final int TYPE_TEXT = 0;
     public static final int TYPE_IMAGE = 1;
 
+    private int mId;
+
     private User mUser;
 
     private String mContent;
@@ -28,6 +30,14 @@ public class StoryContent implements Serializable{
      * 类型，区分旁白、第一人称、第三人称
      */
     private int mType;
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int id) {
+        mId = id;
+    }
 
     public User getUser() {
         return mUser;

@@ -10,9 +10,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.byvoid.wanangushi.R;
+import com.byvoid.wanangushi.activity.PhotoViewerActivity;
 import com.byvoid.wanangushi.model.StoryContent;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.makeramen.roundedimageview.RoundedImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,11 +48,11 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
                 break;
             case TYPE_FIRST_PERSON:
                 view = View.inflate(mContext, R.layout.item_story_first_person,null);
-                viewHolder = new PersonViewHolder(view);
+                viewHolder = new PersonViewHolder(mContext,view);
                 break;
             case TYPE_THIRD_PERSON:
                 view = View.inflate(mContext, R.layout.item_story_third_person,null);
-                viewHolder = new PersonViewHolder(view);
+                viewHolder = new PersonViewHolder(mContext,view);
                 break;
 
             default:
@@ -62,7 +65,9 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((BaseRecyclerViewHolder)holder).binData(mList.get(position),position);
+        StoryContent storyContent = mList.get(position);
+        ((BaseRecyclerViewHolder) holder).binData(storyContent,position);
+        ((BaseRecyclerViewHolder) holder).setListener(mList,position);
     }
 
     @Override
@@ -93,13 +98,16 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
 
     private static class PersonViewHolder extends BaseRecyclerViewHolder<StoryContent>{
 
+        private Context mContext;
         private TextView mTextTv;
         private ImageView mImageIv;
         private RoundedImageView mUserHeadIv;
         private TextView mUserNameTv;
 
-        public PersonViewHolder(View itemView) {
+
+        public PersonViewHolder(Context context,View itemView) {
             super(itemView);
+            mContext = context;
             mTextTv = itemView.findViewById(R.id.textTv);
             mImageIv = itemView.findViewById(R.id.imageIv);
             mUserHeadIv = itemView.findViewById(R.id.userHeadIv);
@@ -120,6 +128,27 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
             }
             Glide.with(mUserHeadIv).load(storyContent.getUser().getAvatar()).into(mUserHeadIv);
             mUserNameTv.setText(storyContent.getUser().getName());
+        }
+
+        @Override
+        public void setListener(final List<StoryContent> storyContents, final int position) {
+            super.setListener(storyContents, position);
+            mImageIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    List<String> imageUrlList = new ArrayList<>();
+                    int index = 0;
+                    for (StoryContent storyContent: storyContents) {
+                        if (storyContent.getContentType() == StoryContent.TYPE_IMAGE){
+                            imageUrlList.add(storyContent.getImageUrl());
+                            if (storyContent.getId() == storyContents.get(position).getId()){
+                                index = imageUrlList.size() - 1;
+                            }
+                        }
+                    }
+                    PhotoViewerActivity.show(mContext,imageUrlList,index);
+                }
+            });
         }
     }
 
