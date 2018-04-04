@@ -43,7 +43,7 @@ public class StoryHomeRecyclerViewAdapter extends RecyclerView.Adapter{
         final Story story = mList.get(position);
         viewHolder.mStoryNameTv.setText(story.getName());
         ViewUtils.refreshHeight(viewHolder.itemView, SizeUtils.dp2px(200 + (position % 5) * 60));
-        Glide.with(mContext).load(R.mipmap.flipbg10).into(viewHolder.mStoryCoverIv);
+        Glide.with(mContext).load(story.getCoverUrl()).into(viewHolder.mStoryCoverIv);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

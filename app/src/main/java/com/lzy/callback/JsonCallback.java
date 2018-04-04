@@ -88,4 +88,27 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
         JsonConvert<T> convert = new JsonConvert<>(type);
         return convert.convertResponse(response);
     }
+
+    @Override
+    public void onSuccess(com.lzy.okgo.model.Response<T> response) {
+        onSuccess(response.body());
+    }
+
+    @Override
+    public void onError(com.lzy.okgo.model.Response<T> response) {
+        super.onError(response);
+        onFail(response.body());
+    }
+
+    /**
+     * 成功回调
+     * @param response t
+     */
+    public abstract void onSuccess(T response);
+
+    /**
+     * 失败回调
+     * @param response t
+     */
+    public abstract void onFail(T response);
 }

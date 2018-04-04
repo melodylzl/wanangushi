@@ -6,10 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
+import com.byvoid.wanangushi.LoadType;
 import com.byvoid.wanangushi.R;
 import com.byvoid.wanangushi.adapter.StoryHomeRecyclerViewAdapter;
 import com.byvoid.wanangushi.base.BaseFragment;
 import com.byvoid.wanangushi.model.Story;
+import com.byvoid.wanangushi.mvp.IStoryHomeFragment;
+import com.byvoid.wanangushi.mvp.StoryHomePresenter;
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +22,12 @@ import java.util.List;
  * @author melody
  * @date 2018/3/21
  */
-public class StoryHomeFragment extends BaseFragment{
+public class StoryHomeFragment extends BaseFragment implements IStoryHomeFragment.IView{
 
-    private RecyclerView mRecyclerView;
+    private XRecyclerView mRecyclerView;
+    private StoryHomeRecyclerViewAdapter mAdapter;
+    private List<Story> mStoryList = new ArrayList<>();
+    private StoryHomePresenter mStoryHomePresenter = new StoryHomePresenter(this);
 
     public static StoryHomeFragment newInstance() {
         Bundle bundle = new Bundle();
@@ -46,28 +53,45 @@ public class StoryHomeFragment extends BaseFragment{
         StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        List<Story> storyList = new ArrayList<>();
-        for (int i = 0; i < 20; ++i){
-            Story story = new Story();
-            story.setName(i + "");
-            storyList.add(story);
-        }
-
-        mRecyclerView.setAdapter(new StoryHomeRecyclerViewAdapter(getContext(),storyList));
-
-
-
+        mAdapter = new StoryHomeRecyclerViewAdapter(getContext(),mStoryList);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     protected void bindData() {
         super.bindData();
+        mStoryHomePresenter.getStoryList(0);
     }
 
     @Override
     protected void setListener() {
         super.setListener();
+        mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+                mStoryHomePresenter.getStoryList(0);
+            }
+
+            @Override
+            public void onLoadMore() {
+               mStoryHomePresenter.getStoryList(1);
+            }
+        });
 
     }
 
+    @Override
+    public void updateView(List<Story> storyList,int loadType) {
+        if (loadType == LoadType.REFRESH){
+            mStoryList.clear();
+            mStoryList.addAll(storyList);
+            mAdapter.notifyDataSetChanged();
+            mRecyclerView.refreshComplete();
+        }else if (loadType == LoadType.LOAD_MORE){
+            mStoryList.addAll(storyList);
+            mAdapter.notifyDataSetChanged();
+            mRecyclerView.loadMoreComplete();
+        }
+
+    }
 }
