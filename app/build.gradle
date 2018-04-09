@@ -1,21 +1,31 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    defaultConfig {
-        applicationId "com.byvoid.wanangushi"
-        minSdkVersion 19
-        targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    signingConfigs {
+        config {
+            keyAlias 'key0'
+            keyPassword '123456'
+            storeFile file('../wags.jks')
+            storePassword '123456'
         }
     }
+    compileSdkVersion 27
+    defaultConfig {
+        appl
+    icationId "com.byvoid.wanangushi"
+    minSdkVersion 19
+    targetSdkVersion 27
+    versionCode 1
+    versionName "1.0"
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+}
+buildTypes {
+    release {
+        minifyEnabled false
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        signingConfig signingConfigs.config
+    }
+}
 }
 
 repositories{
@@ -25,11 +35,8 @@ repositories{
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation fileTree(dir: 'repository',includes: ['*.aar']).collect{ file ->
-        [name : file.name.lastIndexOf('.').with { it != -1 ? file.name[0..<it]:file.name},ext:'aar']
-    }
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(includes: ['*.aar'], dir: 'repository')
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support:recyclerview-v7:27.1.0'
     implementation 'com.lzy.net:okgo:3.0.4'
@@ -39,5 +46,4 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.makeramen:roundedimageview:2.3.0'
-
 }
