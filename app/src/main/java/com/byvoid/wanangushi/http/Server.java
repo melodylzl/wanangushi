@@ -6,5 +6,5 @@ package com.byvoid.wanangushi.http;
  */
 public class Server {
 
-    public static final String HOST_BASE = "http://10.32.8.147:6060";
+    public static final String HOST_BASE = "http://10.32.8.147:6060/";
 }

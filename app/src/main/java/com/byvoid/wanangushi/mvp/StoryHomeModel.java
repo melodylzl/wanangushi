@@ -1,10 +1,8 @@
 package com.byvoid.wanangushi.mvp;
 
-import com.byvoid.wanangushi.http.HttpRequestUtil;
+import com.byvoid.wanangushi.http.HttpService;
+import com.byvoid.wanangushi.http.BaseCallBack;
 import com.byvoid.wanangushi.model.Story;
-import com.lzy.callback.JsonCallback;
-import com.lzy.model.LzyResponse;
-import com.lzy.okgo.model.Response;
 
 import java.util.List;
 
@@ -17,15 +15,15 @@ public class StoryHomeModel implements IStoryHomeModel{
 
     @Override
     public void getStoryList(int page,final IStoryHomeFragment.IGetDataCallBack<List<Story>> callBack) {
-        HttpRequestUtil.getStoryList(page,new JsonCallback<LzyResponse<List<Story>>>() {
+        HttpService.getStoryList(page, new BaseCallBack<List<Story>>() {
             @Override
-            public void onSuccess(LzyResponse<List<Story>> response) {
-                callBack.onSuccess(response.data,response.msg);
+            public void onSuccess(List<Story> data, String msg) {
+                callBack.onSuccess(data,msg);
             }
 
             @Override
-            public void onFail(LzyResponse<List<Story>> response) {
-                callBack.onFail(response.msg,response.code);
+            public void onFail(String msg, int code) {
+                callBack.onFail(msg,code);
             }
         });
     }
