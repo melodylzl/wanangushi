@@ -19,13 +19,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import butterknife.BindView;
+
 /**
  * @author melody
  * @date 2018/3/21
  */
 public class StoryActivity extends BaseActivity{
 
-    private RecyclerView mRecyclerView;
+    @BindView(R.id.recyclerView)
+    protected RecyclerView mRecyclerView;
 
     public static void startToMe(Context context,int id){
         Intent intent = new Intent(context,StoryActivity.class);
@@ -37,12 +40,6 @@ public class StoryActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_story);
-    }
-
-    @Override
-    protected void findView() {
-        super.findView();
-        mRecyclerView = findViewById(R.id.recyclerView);
     }
 
     @Override

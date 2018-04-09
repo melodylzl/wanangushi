@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import butterknife.BindView;
+
 /**
  * 查看大图activity
  * @author melody
@@ -29,7 +31,8 @@ public class PhotoViewerActivity extends BaseActivity{
 
     private int mPosition;
     private List<String> mPhotoUrlList;
-    private ViewPager mViewPager;
+    @BindView(R.id.viewPager)
+    protected ViewPager mViewPager;
 
     public static void show(Context context,String photoUrl){
         List<String> photoUrlList = new ArrayList<>();
@@ -55,12 +58,6 @@ public class PhotoViewerActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_viewer);
-    }
-
-    @Override
-    protected void findView() {
-        super.findView();
-        mViewPager = findViewById(R.id.viewPager);
     }
 
     @Override

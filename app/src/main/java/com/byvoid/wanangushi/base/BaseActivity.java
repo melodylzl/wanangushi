@@ -9,6 +9,8 @@ import android.view.View;
 
 import com.byvoid.wanangushi.utils.LogUtils;
 
+import butterknife.ButterKnife;
+
 
 /**
  * @author melody
@@ -30,6 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
+        ButterKnife.bind(this);
         handleIntentData(getIntent());
         findView();
         bindData();

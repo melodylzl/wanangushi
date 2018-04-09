@@ -16,6 +16,8 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
+import butterknife.BindView;
+
 /**
  * @author melody
  * @date 2018/3/21
@@ -58,15 +60,13 @@ public class StoryHomeRecyclerViewAdapter extends RecyclerView.Adapter{
         return mList.size();
     }
 
-    private static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends BaseRecyclerViewHolder{
 
-        private TextView mStoryNameTv;
-        private RoundedImageView mStoryCoverIv;
+        @BindView(R.id.storyNameTv) TextView mStoryNameTv;
+        @BindView(R.id.storyCoverIv) RoundedImageView mStoryCoverIv;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mStoryNameTv = itemView.findViewById(R.id.storyNameTv);
-            mStoryCoverIv = itemView.findViewById(R.id.storyCoverIv);
         }
     }
 

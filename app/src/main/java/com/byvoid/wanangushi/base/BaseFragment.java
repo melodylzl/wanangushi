@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 
 import com.byvoid.wanangushi.utils.LogUtils;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * @author melody
  * @date 2018/1/24
@@ -19,6 +22,8 @@ public abstract class BaseFragment extends Fragment {
     private static final String TAG = "BaseFragment";
 
     private static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
+
+    private Unbinder unbinder;
 
     /**
      * 当前 Activity 渲染的视图 View
@@ -49,6 +54,7 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setRetainInstance(true);
         contentView = inflater.inflate(getLayoutID(), null);
+        unbinder = ButterKnife.bind(this, contentView);
         com.orhanobut.logger.Logger.d(TAG, "onCreateView: ");
         return contentView;
     }
@@ -83,6 +89,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        unbinder.unbind();
         LogUtils.d(TAG, "onDestroy: ");
     }
 

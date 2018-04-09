@@ -2,7 +2,6 @@ package com.byvoid.wanangushi.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
@@ -18,13 +17,16 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+
 /**
  * @author melody
  * @date 2018/3/21
  */
 public class StoryHomeFragment extends BaseFragment implements IStoryHomeFragment.IView{
 
-    private XRecyclerView mRecyclerView;
+    @BindView(R.id.recyclerView)
+    protected XRecyclerView mRecyclerView;
     private StoryHomeRecyclerViewAdapter mAdapter;
     private List<Story> mStoryList = new ArrayList<>();
     private StoryHomePresenter mStoryHomePresenter = new StoryHomePresenter(this);
@@ -46,20 +48,16 @@ public class StoryHomeFragment extends BaseFragment implements IStoryHomeFragmen
         return R.layout.fragment_story_home;
     }
 
-    @Override
-    protected void findView(View layout) {
-        super.findView(layout);
-        mRecyclerView = layout.findViewById(R.id.recyclerView);
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(layoutManager);
-
-        mAdapter = new StoryHomeRecyclerViewAdapter(getContext(),mStoryList);
-        mRecyclerView.setAdapter(mAdapter);
-    }
 
     @Override
     protected void bindData() {
         super.bindData();
+        mAdapter = new StoryHomeRecyclerViewAdapter(getContext(),mStoryList);
+
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
         mStoryHomePresenter.getStoryList(0);
     }
 
@@ -92,6 +90,5 @@ public class StoryHomeFragment extends BaseFragment implements IStoryHomeFragmen
             mAdapter.notifyDataSetChanged();
             mRecyclerView.loadMoreComplete();
         }
-
     }
 }

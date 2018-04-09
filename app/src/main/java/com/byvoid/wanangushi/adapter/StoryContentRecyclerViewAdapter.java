@@ -18,6 +18,8 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+
 /**
  * @author melody
  * @date 2018/3/23
@@ -96,22 +98,18 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
         }
     }
 
-    private static class PersonViewHolder extends BaseRecyclerViewHolder<StoryContent>{
+    public static class PersonViewHolder extends BaseRecyclerViewHolder<StoryContent>{
 
         private Context mContext;
-        private TextView mTextTv;
-        private ImageView mImageIv;
-        private RoundedImageView mUserHeadIv;
-        private TextView mUserNameTv;
+        @BindView(R.id.textTv) TextView mTextTv;
+        @BindView(R.id.imageIv) ImageView mImageIv;
+        @BindView(R.id.userHeadIv) RoundedImageView mUserHeadIv;
+        @BindView(R.id.userNameTv) TextView mUserNameTv;
 
 
         public PersonViewHolder(Context context,View itemView) {
             super(itemView);
             mContext = context;
-            mTextTv = itemView.findViewById(R.id.textTv);
-            mImageIv = itemView.findViewById(R.id.imageIv);
-            mUserHeadIv = itemView.findViewById(R.id.userHeadIv);
-            mUserNameTv = itemView.findViewById(R.id.userNameTv);
         }
 
         @Override

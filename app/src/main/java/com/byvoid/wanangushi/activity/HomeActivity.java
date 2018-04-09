@@ -1,5 +1,6 @@
 package com.byvoid.wanangushi.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,26 +16,23 @@ import com.yinglan.alphatabs.AlphaTabsIndicator;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+
 /**
  * @author melody
  * @date 2018/3/9
  */
 public class HomeActivity extends BaseActivity{
 
-    private ViewPager mViewPager;
-    private AlphaTabsIndicator mAlphaTabsIndicator;
+    @BindView(R.id.mViewPager)
+    protected ViewPager mViewPager;
+    @BindView(R.id.alphaIndicator)
+    protected AlphaTabsIndicator mAlphaTabsIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-    }
-
-    @Override
-    protected void findView() {
-        super.findView();
-        mViewPager = findViewById(R.id.mViewPager);
-        mAlphaTabsIndicator = findViewById(R.id.alphaIndicator);
     }
 
     @Override
