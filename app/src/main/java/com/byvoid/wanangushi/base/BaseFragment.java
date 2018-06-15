@@ -17,7 +17,7 @@ import butterknife.Unbinder;
  * @author melody
  * @date 2018/1/24
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements View.OnClickListener{
 
     private static final String TAG = "BaseFragment";
 
@@ -114,6 +114,19 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void setListener(){
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        try {
+            handleOnClick(view);
+        } catch (Throwable t) {
+            LogUtils.d(getClass().getSimpleName(),t);
+        }
+    }
+
+    protected void handleOnClick(View view){
 
     }
 

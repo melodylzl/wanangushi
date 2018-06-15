@@ -1,6 +1,5 @@
 package com.byvoid.wanangushi.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,8 +8,8 @@ import android.support.v4.view.ViewPager;
 
 import com.byvoid.wanangushi.R;
 import com.byvoid.wanangushi.base.BaseActivity;
+import com.byvoid.wanangushi.fragment.SettingFragment;
 import com.byvoid.wanangushi.fragment.StoryHomeFragment;
-import com.byvoid.wanangushi.fragment.TextFragment;
 import com.yinglan.alphatabs.AlphaTabsIndicator;
 
 import java.util.ArrayList;
@@ -54,12 +53,11 @@ public class HomeActivity extends BaseActivity{
     private class MainAdapter extends FragmentPagerAdapter implements ViewPager.OnPageChangeListener {
 
         private List<Fragment> fragments = new ArrayList<>();
-        private String[] titles = {"故事", "我"};
 
         public MainAdapter(FragmentManager fm) {
             super(fm);
             fragments.add(StoryHomeFragment.newInstance());
-            fragments.add(TextFragment.newInstance(titles[1]));
+            fragments.add(SettingFragment.newInstance());
         }
 
         @Override

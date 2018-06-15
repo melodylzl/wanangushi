@@ -43,7 +43,7 @@
             android:padding="5dp"
             app:tabIconNormal="@mipmap/mine_normal"
             app:tabIconSelected="@mipmap/mine_selected"
-            app:tabText="我"
+            app:tabText="设置"
             app:tabTextSize="13sp"
             app:textColorNormal="#999999"
             app:textColorSelected="#46c01b" />

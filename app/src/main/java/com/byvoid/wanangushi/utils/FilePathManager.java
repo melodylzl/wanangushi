@@ -69,4 +69,15 @@ public class FilePathManager {
     }
 
 
+    public static final String DOWNLOAD_PATH = "/download";
+
+    /**
+     * 获取app下载文件目录
+     * @return /Android/data/<package_name>/files/download
+     */
+    public static String getDownloadPath(){
+        return getExternalFilesPath() + DOWNLOAD_PATH;
+    }
+
+
 }

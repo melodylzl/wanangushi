@@ -209,4 +209,7 @@
     <color name="YellowGreen">#9ACD32</color>
     <!-- z -->
 
+
+    <color name="bg_color">#f2f3f5</color>
+
 </resources>

@@ -82,13 +82,12 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
         return mList.get(position).getType();
     }
 
-    private static class AsideViewHolder extends BaseRecyclerViewHolder<StoryContent>{
+    public static class AsideViewHolder extends BaseRecyclerViewHolder<StoryContent>{
 
-        private TextView mTextTv;
+        @BindView(R.id.textTv) TextView mTextTv;
 
         public AsideViewHolder(View itemView) {
             super(itemView);
-            mTextTv = itemView.findViewById(R.id.textTv);
         }
 
         @Override
@@ -143,7 +142,7 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
                                 index = imageUrlList.size() - 1;
                             }
                         }
-                    }
+                    } 
                     PhotoViewerActivity.show(mContext,imageUrlList,index);
                 }
             });
