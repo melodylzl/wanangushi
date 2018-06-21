@@ -8,6 +8,7 @@ import android.support.v4.content.FileProvider;
 
 import com.byvoid.wanangushi.BuildConfig;
 import com.byvoid.wanangushi.model.Story;
+import com.byvoid.wanangushi.model.StoryDetail;
 import com.byvoid.wanangushi.model.UpdateInfo;
 import com.byvoid.wanangushi.utils.AppUtils;
 import com.byvoid.wanangushi.utils.FileIOUtils;
@@ -91,6 +92,13 @@ public class HttpService {
 
     public static void getStoryList(int page, BaseCallBack<List<Story>> callBack){
         getApiService().getStoryList(page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callBack);
+    }
+
+    public static void getStoryDetail(int id, BaseCallBack<StoryDetail> callBack){
+        getApiService().getStoryDetail(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callBack);

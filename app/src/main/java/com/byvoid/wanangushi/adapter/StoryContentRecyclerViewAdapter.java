@@ -38,6 +38,14 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
         mList = list;
     }
 
+    public void setData(List<StoryContent> list){
+        if (mList != list){
+            mList.clear();
+            mList.addAll(list);
+        }
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -123,8 +131,8 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
                 mImageIv.setVisibility(View.VISIBLE);
                 Glide.with(mImageIv).load(storyContent.getImageUrl()).into(mImageIv);
             }
-            Glide.with(mUserHeadIv).load(storyContent.getUser().getAvatar()).into(mUserHeadIv);
-            mUserNameTv.setText(storyContent.getUser().getName());
+            Glide.with(mUserHeadIv).load(storyContent.getRole().getAvatar()).into(mUserHeadIv);
+            mUserNameTv.setText(storyContent.getRole().getName());
         }
 
         @Override

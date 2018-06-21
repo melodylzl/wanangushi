@@ -1,6 +1,7 @@
 package com.byvoid.wanangushi.http;
 
 import com.byvoid.wanangushi.model.Story;
+import com.byvoid.wanangushi.model.StoryDetail;
 import com.byvoid.wanangushi.model.UpdateInfo;
 import com.byvoid.wanangushi.mvp.IBaseCallBack;
 
@@ -21,6 +22,8 @@ public interface ApiService {
 
     @GET("story/list")
     Observable<BaseResult<List<Story>>> getStoryList(@Query("page") int page);
+    @GET("story/detail")
+    Observable<BaseResult<StoryDetail>> getStoryDetail(@Query("id") int id);
     @GET("update/check")
     Observable<BaseResult<UpdateInfo>> getUpdateInfo();
     @GET

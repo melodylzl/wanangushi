@@ -1,26 +1,33 @@
 package com.byvoid.wanangushi.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 /**
  * @author melody
  * @date 2018/3/23
  */
-public class User implements Serializable{
+public class Role implements Serializable{
     private static final long serialVersionUID = -9066930415986633041L;
 
-    private int mUid;
-
+    @SerializedName("id")
+    private int mId;
+    @SerializedName("name")
     private String mName;
-
+    @SerializedName("avatar")
     private String mAvatar;
 
-    public void setUid(int uid) {
-        this.mUid = uid;
+    public Role(){
+
     }
 
-    public int getUid() {
-        return mUid;
+    public void setId(int id) {
+        this.mId = id;
+    }
+
+    public int getId() {
+        return mId;
     }
 
     public String getName() {
