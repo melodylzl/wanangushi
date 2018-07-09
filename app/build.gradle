@@ -22,10 +22,17 @@ android {
     }
 
     buildTypes {
+
+        debug {
+            buildConfigField("String","SERVER_URL","\"http://10.32.8.147:6060\"")
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
+
+            buildConfigField("String","SERVER_URL","\"http://10.32.8.147:6060\"")
         }
     }
 }
