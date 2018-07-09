@@ -12,6 +12,7 @@ import com.byvoid.wanangushi.base.BaseFragment;
 import com.byvoid.wanangushi.model.Story;
 import com.byvoid.wanangushi.mvp.IStoryHomeFragment;
 import com.byvoid.wanangushi.mvp.StoryHomePresenter;
+import com.byvoid.wanangushi.utils.ListUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
@@ -72,7 +73,11 @@ public class StoryHomeFragment extends BaseFragment implements IStoryHomeFragmen
 
             @Override
             public void onLoadMore() {
-               mStoryHomePresenter.getStoryList(1);
+                Story story = ListUtils.getLastItem(mStoryList);
+                if (null == story){
+                    return;
+                }
+                mStoryHomePresenter.getStoryList(story.getId());
             }
         });
 

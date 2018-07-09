@@ -19,11 +19,11 @@ public class StoryHomePresenter {
         iStoryHomeModel = new StoryHomeModel();
     }
 
-    public void getStoryList(final int page){
-        iStoryHomeModel.getStoryList(page,new IStoryHomeFragment.IGetDataCallBack<List<Story>>() {
+    public void getStoryList(final int lastId){
+        iStoryHomeModel.getStoryList(lastId,new IStoryHomeFragment.IGetDataCallBack<List<Story>>() {
             @Override
             public void onSuccess(List<Story> stories, String msg) {
-                mView.updateView(stories,page > 0 ? LoadType.LOAD_MORE : LoadType.REFRESH);
+                mView.updateView(stories,lastId > 0 ? LoadType.LOAD_MORE : LoadType.REFRESH);
             }
 
             @Override

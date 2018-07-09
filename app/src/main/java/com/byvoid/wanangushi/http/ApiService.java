@@ -21,7 +21,7 @@ import retrofit2.http.Url;
 public interface ApiService {
 
     @GET("story/list")
-    Observable<BaseResult<List<Story>>> getStoryList(@Query("page") int page);
+    Observable<BaseResult<List<Story>>> getStoryList(@Query("lastId") int lastId);
     @GET("story/detail")
     Observable<BaseResult<StoryDetail>> getStoryDetail(@Query("id") int id);
     @GET("update/check")

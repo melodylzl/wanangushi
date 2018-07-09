@@ -90,8 +90,8 @@ public class HttpService {
     /*-----------------------------以下是Http请求方法-----------------------------------*/
 
 
-    public static void getStoryList(int page, BaseCallBack<List<Story>> callBack){
-        getApiService().getStoryList(page)
+    public static void getStoryList(int lastId, BaseCallBack<List<Story>> callBack){
+        getApiService().getStoryList(lastId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callBack);

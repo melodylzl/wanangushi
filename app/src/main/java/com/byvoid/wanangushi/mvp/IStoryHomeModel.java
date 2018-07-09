@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface IStoryHomeModel {
 
-    void getStoryList(int page,IStoryHomeFragment.IGetDataCallBack<List<Story>> callBack);
+    void getStoryList(int lastId,IStoryHomeFragment.IGetDataCallBack<List<Story>> callBack);
 }

@@ -29,7 +29,6 @@ public class UpdateInfo implements Serializable{
 
     }
 
-
     public int getVersionCode() {
         return versionCode;
     }

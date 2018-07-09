@@ -18,6 +18,10 @@ public class Story implements Serializable{
     @SerializedName("cover")
     private String mCoverUrl;
 
+    public Story(){
+
+    }
+
     public String getName() {
         return mName;
     }

@@ -10,16 +10,9 @@ import android.support.v7.widget.Toolbar;
 import com.byvoid.wanangushi.R;
 import com.byvoid.wanangushi.adapter.StoryContentRecyclerViewAdapter;
 import com.byvoid.wanangushi.base.BaseActivity;
-import com.byvoid.wanangushi.http.HttpService;
-import com.byvoid.wanangushi.model.StoryContent;
-import com.byvoid.wanangushi.model.Role;
 import com.byvoid.wanangushi.model.StoryDetail;
 import com.byvoid.wanangushi.mvp.IStoryActivity;
 import com.byvoid.wanangushi.mvp.StoryDetailPresenter;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import butterknife.BindView;
 
@@ -36,7 +29,6 @@ public class StoryActivity extends BaseActivity implements IStoryActivity{
 
     protected int mId;
     protected StoryContentRecyclerViewAdapter mAdapter;
-    protected StoryDetail mStoryDetail;
     protected StoryDetailPresenter mStoryDetailPresenter = new StoryDetailPresenter(this);
 
     public static void startToMe(Context context,int id){
@@ -71,13 +63,12 @@ public class StoryActivity extends BaseActivity implements IStoryActivity{
 
     @Override
     public void setData(StoryDetail storyDetail) {
-        mStoryDetail = storyDetail;
-        mToolBar.setTitle(mStoryDetail.getName());
+        mToolBar.setTitle(storyDetail.getName());
         if (mAdapter == null){
-            mAdapter = new StoryContentRecyclerViewAdapter(this,mStoryDetail.getStoryContentList());
+            mAdapter = new StoryContentRecyclerViewAdapter(this,storyDetail.getStoryTalkList());
             mRecyclerView.setAdapter(mAdapter);
         }else{
-            mAdapter.setData(mStoryDetail.getStoryContentList());
+            mAdapter.setData(storyDetail.getStoryTalkList());
         }
     }
 }

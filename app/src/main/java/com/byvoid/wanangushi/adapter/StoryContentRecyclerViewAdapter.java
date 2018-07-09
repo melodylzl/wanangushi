@@ -11,8 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.byvoid.wanangushi.R;
 import com.byvoid.wanangushi.activity.PhotoViewerActivity;
-import com.byvoid.wanangushi.model.StoryContent;
-import com.github.chrisbanes.photoview.PhotoView;
+import com.byvoid.wanangushi.model.StoryTalk;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
@@ -26,19 +25,15 @@ import butterknife.BindView;
  */
 public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
 
-    private static final int TYPE_ASIDE = 0;
-    private static final int TYPE_FIRST_PERSON = 1;
-    private static final int TYPE_THIRD_PERSON = 2;
-
     private Context mContext;
-    private List<StoryContent> mList;
+    private List<StoryTalk> mList;
 
-    public StoryContentRecyclerViewAdapter(Context context,List<StoryContent> list){
+    public StoryContentRecyclerViewAdapter(Context context,List<StoryTalk> list){
         mContext = context;
         mList = list;
     }
 
-    public void setData(List<StoryContent> list){
+    public void setData(List<StoryTalk> list){
         if (mList != list){
             mList.clear();
             mList.addAll(list);
@@ -52,15 +47,15 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
         RecyclerView.ViewHolder viewHolder;
         View view;
         switch (viewType){
-            case TYPE_ASIDE:
+            case StoryTalk.SENDER_ASIDE:
                 view = View.inflate(mContext, R.layout.item_story_aside,null);
                 viewHolder = new AsideViewHolder(view);
                 break;
-            case TYPE_FIRST_PERSON:
+            case StoryTalk.SENDER_FIRST_PERSON:
                 view = View.inflate(mContext, R.layout.item_story_first_person,null);
                 viewHolder = new PersonViewHolder(mContext,view);
                 break;
-            case TYPE_THIRD_PERSON:
+            case StoryTalk.SENDER_THIRD_PERSON:
                 view = View.inflate(mContext, R.layout.item_story_third_person,null);
                 viewHolder = new PersonViewHolder(mContext,view);
                 break;
@@ -75,8 +70,8 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        StoryContent storyContent = mList.get(position);
-        ((BaseRecyclerViewHolder) holder).binData(storyContent,position);
+        StoryTalk storyTalk = mList.get(position);
+        ((BaseRecyclerViewHolder) holder).binData(storyTalk,position);
         ((BaseRecyclerViewHolder) holder).setListener(mList,position);
     }
 
@@ -87,10 +82,10 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
 
     @Override
     public int getItemViewType(int position) {
-        return mList.get(position).getType();
+        return mList.get(position).getSender();
     }
 
-    public static class AsideViewHolder extends BaseRecyclerViewHolder<StoryContent>{
+    public static class AsideViewHolder extends BaseRecyclerViewHolder<StoryTalk>{
 
         @BindView(R.id.textTv) TextView mTextTv;
 
@@ -99,13 +94,13 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
         }
 
         @Override
-        public void binData(StoryContent storyContent,int position) {
-            super.binData(storyContent,position);
-            mTextTv.setText(storyContent.getContent());
+        public void binData(StoryTalk storyTalk, int position) {
+            super.binData(storyTalk,position);
+            mTextTv.setText(storyTalk.getContent());
         }
     }
 
-    public static class PersonViewHolder extends BaseRecyclerViewHolder<StoryContent>{
+    public static class PersonViewHolder extends BaseRecyclerViewHolder<StoryTalk>{
 
         private Context mContext;
         @BindView(R.id.textTv) TextView mTextTv;
@@ -120,33 +115,33 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
         }
 
         @Override
-        public void binData(StoryContent storyContent, int position) {
-            super.binData(storyContent, position);
-            if (storyContent.getContentType() == StoryContent.TYPE_TEXT){
+        public void binData(StoryTalk storyTalk, int position) {
+            super.binData(storyTalk, position);
+            if (storyTalk.getType() == StoryTalk.TYPE_TEXT){
                 mTextTv.setVisibility(View.VISIBLE);
                 mImageIv.setVisibility(View.GONE);
-                mTextTv.setText(storyContent.getContent());
-            }else if (storyContent.getContentType() == StoryContent.TYPE_IMAGE){
+                mTextTv.setText(storyTalk.getContent());
+            }else if (storyTalk.getType() == StoryTalk.TYPE_IMAGE){
                 mTextTv.setVisibility(View.GONE);
                 mImageIv.setVisibility(View.VISIBLE);
-                Glide.with(mImageIv).load(storyContent.getImageUrl()).into(mImageIv);
+                Glide.with(mImageIv).load(storyTalk.getImageUrl()).into(mImageIv);
             }
-            Glide.with(mUserHeadIv).load(storyContent.getRole().getAvatar()).into(mUserHeadIv);
-            mUserNameTv.setText(storyContent.getRole().getName());
+            Glide.with(mUserHeadIv).load(storyTalk.getRole().getAvatar()).into(mUserHeadIv);
+            mUserNameTv.setText(storyTalk.getRole().getName());
         }
 
         @Override
-        public void setListener(final List<StoryContent> storyContents, final int position) {
-            super.setListener(storyContents, position);
+        public void setListener(final List<StoryTalk> storyTalks, final int position) {
+            super.setListener(storyTalks, position);
             mImageIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     List<String> imageUrlList = new ArrayList<>();
                     int index = 0;
-                    for (StoryContent storyContent: storyContents) {
-                        if (storyContent.getContentType() == StoryContent.TYPE_IMAGE){
-                            imageUrlList.add(storyContent.getImageUrl());
-                            if (storyContent.getId() == storyContents.get(position).getId()){
+                    for (StoryTalk storyTalk : storyTalks) {
+                        if (storyTalk.getType() == StoryTalk.TYPE_IMAGE){
+                            imageUrlList.add(storyTalk.getImageUrl());
+                            if (storyTalk.getId() == storyTalks.get(position).getId()){
                                 index = imageUrlList.size() - 1;
                             }
                         }

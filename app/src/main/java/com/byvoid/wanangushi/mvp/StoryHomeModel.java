@@ -14,8 +14,8 @@ public class StoryHomeModel implements IStoryHomeModel{
 
 
     @Override
-    public void getStoryList(int page,final IStoryHomeFragment.IGetDataCallBack<List<Story>> callBack) {
-        HttpService.getStoryList(page, new BaseCallBack<List<Story>>() {
+    public void getStoryList(int lastId,final IStoryHomeFragment.IGetDataCallBack<List<Story>> callBack) {
+        HttpService.getStoryList(lastId, new BaseCallBack<List<Story>>() {
             @Override
             public void onSuccess(List<Story> data, String msg) {
                 callBack.onSuccess(data,msg);

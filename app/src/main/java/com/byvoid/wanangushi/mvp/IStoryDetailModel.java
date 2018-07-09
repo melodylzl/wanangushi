@@ -9,4 +9,6 @@ import com.byvoid.wanangushi.model.StoryDetail;
 public interface IStoryDetailModel {
 
     void getStoryDetail(int id, IBaseCallBack.IGetDataCallBack<StoryDetail> callBack);
+
+    StoryDetail getStoryDetailData();
 }

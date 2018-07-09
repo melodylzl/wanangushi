@@ -30,4 +30,8 @@ public class StoryDetailPresenter {
             }
         });
     }
+
+    public StoryDetail getStoryDetailData(){
+        return mModel.getStoryDetailData();
+    }
 }
