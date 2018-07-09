@@ -1,8 +1,5 @@
 package com.byvoid.wanangushi.mvp;
 
-import com.byvoid.wanangushi.http.BaseCallBack;
-import com.byvoid.wanangushi.http.HttpRequestUtil;
-import com.byvoid.wanangushi.http.HttpService;
 import com.byvoid.wanangushi.model.UpdateInfo;
 import com.byvoid.wanangushi.utils.ToastUtils;
 
