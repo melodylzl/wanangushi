@@ -3,6 +3,7 @@ package com.byvoid.wanangushi.app;
 import com.byvoid.wanangushi.base.BaseApplication;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.umeng.commonsdk.UMConfigure;
 
 /**
  * @author melody
@@ -21,9 +22,14 @@ public class UtilsApplication extends BaseApplication{
         super.onCreate();
         sInstance = this;
         initLogger();
+        initUMeng();
     }
 
     protected void initLogger(){
         Logger.addLogAdapter(new AndroidLogAdapter());
+    }
+
+    protected void initUMeng(){
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
     }
 }

@@ -35,6 +35,31 @@ android {
             buildConfigField("String","SERVER_URL","\"http://10.32.8.147:6060\"")
         }
     }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        yingyongbao {
+            dimension "default"
+        }
+        wandoujia {
+            dimension "default"
+        }
+        xiaomi {
+            dimension "default"
+        }
+    }
+
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = outputFileName.replace("app", "wanangushi")
+        }
+    }
+
 }
 
 repositories{
@@ -66,6 +91,9 @@ dependencies {
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
+
+    implementation 'com.umeng.sdk:common:latest.integration'
+    implementation 'com.umeng.sdk:analytics:latest.integration'
 
 
 }
