@@ -1,4 +1,4 @@
-package com.lzy.utils;
+package com.byvoid.wanangushi.utils;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
