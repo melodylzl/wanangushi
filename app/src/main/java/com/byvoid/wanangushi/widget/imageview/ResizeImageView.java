@@ -7,8 +7,8 @@ import android.util.AttributeSet;
 
 
 /**
- * 图片根据控件的宽度拉伸，直到图片在宽度方向上填充整个控件；
- * 图片的高根据宽的拉伸比例拉伸，但高度自适应
+ * 高度自适应的ImageView
+ * 控件的高=控件的宽/图片的实际宽*图片的实际高
  * @author melody
  * @date 2018/8/7
  */
