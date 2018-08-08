@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.byvoid.wanangushi.R;
 import com.byvoid.wanangushi.adapter.StoryContentRecyclerViewAdapter;
@@ -59,6 +60,12 @@ public class StoryActivity extends BaseActivity implements IStoryActivity{
     @Override
     protected void setListener() {
         super.setListener();
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
