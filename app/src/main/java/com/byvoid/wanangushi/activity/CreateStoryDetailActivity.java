@@ -20,6 +20,7 @@ import com.byvoid.wanangushi.model.BaseResponse;
 import com.byvoid.wanangushi.model.StoryTalk;
 import com.byvoid.wanangushi.utils.LogUtils;
 import com.byvoid.wanangushi.utils.TakePhotoUtils;
+import com.byvoid.wanangushi.utils.ToastUtils;
 import com.google.gson.Gson;
 
 import org.devio.takephoto.model.TResult;
@@ -98,12 +99,13 @@ public class CreateStoryDetailActivity extends TakePhotoActivity{
                 HttpService.createStory(name, mCoverUrl, gson.toJson(mStoryTalkList), new BaseCallBack<BaseResponse>() {
                     @Override
                     public void onSuccess(BaseResponse data, String msg) {
-
+                        ToastUtils.show(msg);
+                        finish();
                     }
 
                     @Override
                     public void onFail(String msg, int code) {
-
+                        ToastUtils.show(msg);
                     }
                 });
 
