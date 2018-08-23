@@ -219,3 +219,24 @@
 
 # Ignore JSR 305 annotations for embedding nullability information.
 -dontwarn javax.annotation.**
+
+# TakePhoto
+-keep class org.devio.takephoto.** { *; }
+-dontwarn org.devio..takephoto.**
+
+-keep class com.darsh.multipleimageselect.** { *; }
+-dontwarn com.darsh.multipleimageselect.**
+
+-keep class com.soundcloud.android.crop.** { *; }
+-dontwarn com.soundcloud.android.crop.**
+
+# EventBus
+-keepclassmembers class * {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
+
+# Only required if you use AsyncExecutor
+-keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {
+    <init>(java.lang.Throwable);
+}

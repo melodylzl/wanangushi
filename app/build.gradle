@@ -24,7 +24,11 @@ android {
     buildTypes {
 
         debug {
-            buildConfigField("String","SERVER_URL","\"http://10.32.8.147:6060\"")
+            minifyEnabled false
+            shrinkResources false
+            zipAlignEnabled false
+//            buildConfigField("String","SERVER_URL","\"http://47.106.22.65:3389\"")
+            buildConfigField("String","SERVER_URL","\"http://10.32.8.147:3389\"")
         }
 
         release {
@@ -34,7 +38,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
 
-            buildConfigField("String","SERVER_URL","\"http://10.32.8.147:6060\"")
+            buildConfigField("String","SERVER_URL","\"http://47.106.22.65:3389\"")
         }
     }
 
@@ -90,6 +94,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation 'org.devio.takephoto:takephoto_library:4.1.0'
+
 
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'

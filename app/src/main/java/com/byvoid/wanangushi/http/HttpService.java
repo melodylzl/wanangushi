@@ -7,6 +7,8 @@ import android.os.Build;
 import android.support.v4.content.FileProvider;
 
 import com.byvoid.wanangushi.BuildConfig;
+import com.byvoid.wanangushi.model.BaseResponse;
+import com.byvoid.wanangushi.model.Role;
 import com.byvoid.wanangushi.model.Story;
 import com.byvoid.wanangushi.model.StoryDetail;
 import com.byvoid.wanangushi.model.UpdateInfo;
@@ -163,6 +165,29 @@ public class HttpService {
 
                     }
                 });
+    }
+
+    public static void getRoleList(int lastId, BaseCallBack<List<Role>> callBack){
+        getApiService().getRoleList(lastId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callBack);
+    }
+
+    public static void createRole(String name,String avatar,BaseCallBack<BaseResponse> callBack){
+        getApiService().createRole(name,avatar)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callBack);
+
+    }
+
+    public static void createStory(String name,String cover,String talkListJson,BaseCallBack<BaseResponse> callBack){
+        getApiService().createStory(name,cover,talkListJson)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callBack);
+
     }
 
 

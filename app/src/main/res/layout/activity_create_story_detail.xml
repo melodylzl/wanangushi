@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:toolbar="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        toolbar:navigationIcon="@mipmap/icon_back"
+        toolbar:title="@string/create_story"
+        toolbar:titleTextColor="@color/white"
+        toolbar:theme="@style/AppTheme"
+        toolbar:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/coverIv"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/icon_image_add"/>
+
+        <EditText
+            android:id="@+id/nameEt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/coverIv"
+            android:layout_marginTop="10dp"
+            android:hint="输入故事名"/>
+
+        <Button
+            android:id="@+id/completeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nameEt"
+            android:layout_marginTop="10dp"
+            android:text="@string/complete"/>
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>

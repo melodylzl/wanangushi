@@ -11,6 +11,11 @@ import java.io.Serializable;
 public class Role implements Serializable{
     private static final long serialVersionUID = -9066930415986633041L;
 
+    /**
+     * 旁白的id
+     */
+    public static final int ASIDE_ID = 1;
+
     @SerializedName("id")
     private int mId;
     @SerializedName("name")

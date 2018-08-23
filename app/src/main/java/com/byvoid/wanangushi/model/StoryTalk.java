@@ -24,9 +24,9 @@ public class StoryTalk implements Serializable{
     @SerializedName("roleId")
     private int roleId;
     @SerializedName("content")
-    private String content;
+    private String content = "";
     @SerializedName("image")
-    private String imageUrl;
+    private String imageUrl = "";
     @SerializedName("type")
     private int type;
     @SerializedName("sender")
@@ -44,6 +44,10 @@ public class StoryTalk implements Serializable{
         return roleId;
     }
 
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
     public String getContent() {
         return content;
     }
@@ -56,6 +60,10 @@ public class StoryTalk implements Serializable{
         return imageUrl;
     }
 
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
     public int getType(){
         return type;
     }
@@ -66,6 +74,10 @@ public class StoryTalk implements Serializable{
 
     public int getSender() {
         return sender;
+    }
+
+    public void setSender(int sender) {
+        this.sender = sender;
     }
 
     private Role role;

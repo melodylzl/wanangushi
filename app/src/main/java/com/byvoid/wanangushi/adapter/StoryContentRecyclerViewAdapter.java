@@ -72,7 +72,7 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         StoryTalk storyTalk = mList.get(position);
         ((BaseRecyclerViewHolder) holder).binData(storyTalk,position);
-        ((BaseRecyclerViewHolder) holder).setListener(mList,position);
+        ((BaseRecyclerViewHolder) holder).setListener(mList,position,null);
     }
 
     @Override
@@ -131,8 +131,8 @@ public class StoryContentRecyclerViewAdapter extends RecyclerView.Adapter{
         }
 
         @Override
-        public void setListener(final List<StoryTalk> storyTalks, final int position) {
-            super.setListener(storyTalks, position);
+        public void setListener(final List<StoryTalk> storyTalks, final int position,OnItemClickListener onItemClickListener) {
+            super.setListener(storyTalks, position,onItemClickListener);
             mImageIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

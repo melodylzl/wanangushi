@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.byvoid.wanangushi.R;
+import com.byvoid.wanangushi.activity.CreateStoryActivity;
 import com.byvoid.wanangushi.base.BaseFragment;
 import com.byvoid.wanangushi.http.HttpService;
 import com.byvoid.wanangushi.model.UpdateInfo;
@@ -33,6 +34,8 @@ public class SettingFragment extends BaseFragment implements IUpdateView{
     protected TextView mUpdateTv;
     @BindView(R.id.versionTv)
     protected TextView mVersionTv;
+    @BindView(R.id.createStoryView)
+    protected View mCreateStoryView;
 
     private UpdatePresenter mUpdatePresenter = new UpdatePresenter(this);
 
@@ -55,6 +58,7 @@ public class SettingFragment extends BaseFragment implements IUpdateView{
     protected void setListener() {
         super.setListener();
         mCheckUpdateView.setOnClickListener(this);
+        mCreateStoryView.setOnClickListener(this);
     }
 
     @Override
@@ -62,6 +66,9 @@ public class SettingFragment extends BaseFragment implements IUpdateView{
         switch (view.getId()){
             case R.id.checkUpdateView:
                 mUpdatePresenter.getUpdateInfo();
+                break;
+            case R.id.createStoryView:
+                CreateStoryActivity.startToMe(getContext());
                 break;
             default:
                 break;

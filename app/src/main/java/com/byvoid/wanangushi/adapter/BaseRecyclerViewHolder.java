@@ -27,7 +27,7 @@ public class BaseRecyclerViewHolder<T> extends RecyclerView.ViewHolder{
 
     }
 
-    public void setListener(List<T> tList, int position){
+    public void setListener(List<T> tList, int position,OnItemClickListener onItemClickListener){
 
     }
 

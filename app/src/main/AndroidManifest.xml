@@ -69,21 +69,27 @@
             android:name="com.byvoid.wanangushi.activity.StoryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name="com.byvoid.wanangushi.activity.PhotoViewerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.byvoid.wanangushi.activity.CreateStoryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.byvoid.wanangushi.activity.SelectRoleActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.byvoid.wanangushi.activity.CreateRoleActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.byvoid.wanangushi.activity.CreateStoryDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"/>
 
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.file_provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
 
         <meta-data android:value="5b449e1bb27b0a060f00008b" android:name="UMENG_APPKEY"/>
         <meta-data android:value="${UMENG_CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/>

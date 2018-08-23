@@ -70,6 +70,7 @@ public class FilePathManager {
 
 
     public static final String DOWNLOAD_PATH = "/download";
+    public static final String IMAGE_PATH = "/image";
 
     /**
      * 获取app下载文件目录
@@ -77,6 +78,14 @@ public class FilePathManager {
      */
     public static String getDownloadPath(){
         return getExternalFilesPath() + DOWNLOAD_PATH;
+    }
+
+    /**
+     * 获取app图片目录
+     * @return /Android/data/<package_name>/files/image
+     */
+    public static String getImagePath(){
+        return getExternalFilesPath() + IMAGE_PATH;
     }
 
 

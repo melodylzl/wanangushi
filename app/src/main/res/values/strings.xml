@@ -4,5 +4,13 @@
     <string name="story">故事</string>
     <string name="check_update">检查更新</string>
     <string name="is_latest_version">已是最新版本</string>
+    <string name="create_story">创建故事</string>
+    <string name="select_role">选择角色</string>
+    <string name="create_role">创建角色</string>
+    <string name="complete">完成</string>
+    <string name="send">发送</string>
+
+
+
 
 </resources>
