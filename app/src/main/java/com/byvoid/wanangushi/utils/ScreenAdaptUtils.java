@@ -15,7 +15,10 @@ import com.byvoid.wanangushi.app.UtilsApplication;
  */
 public class ScreenAdaptUtils {
 
-
+    /**
+     * 取消适配
+     * @param activity 取消适配的activity
+     */
     public static void cancelCustomDensity(@NonNull Activity activity){
         final DisplayMetrics systemDisplayMetrics = Resources.getSystem().getDisplayMetrics();
         final DisplayMetrics appDisplayMetrics = UtilsApplication.getInstance().getResources().getDisplayMetrics();
@@ -28,22 +31,38 @@ public class ScreenAdaptUtils {
         appDisplayMetrics.densityDpi = systemDisplayMetrics.densityDpi;
     }
 
+    /**
+     * 适配垂直方向
+     * @param activity 适配的activity
+     * @param size 美术稿给的高度(扣除状态栏的高度),单位dp
+     */
     public static void setCustomDensityVertical(@NonNull Activity activity, int size){
         setCustomDensity(activity,size,true);
     }
 
+    /**
+     * 适配水平方向
+     * @param activity 适配的activity
+     * @param size 美术稿给的宽度,单位dp
+     */
     public static void setCustomDensityHorizontal(@NonNull Activity activity, int size){
         setCustomDensity(activity,size,false);
     }
 
+    /**
+     * 适配、
+     * @param activity 适配的activity
+     * @param size 美术稿给的高度(扣除状态栏的高度)或宽度,单位dp
+     * @param isVertical 是否适配垂直方向 true 垂直，false 水平
+     */
     public static void setCustomDensity(@NonNull Activity activity, int size, boolean isVertical){
         final DisplayMetrics systemDisplayMetrics = Resources.getSystem().getDisplayMetrics();
         final DisplayMetrics appDisplayMetrics = UtilsApplication.getInstance().getResources().getDisplayMetrics();
         final DisplayMetrics activityDisplayMetrics = activity.getResources().getDisplayMetrics();
         if (isVertical){
-            activityDisplayMetrics.density = appDisplayMetrics.widthPixels / size;
+            activityDisplayMetrics.density = appDisplayMetrics.heightPixels / (float) size;
         }else{
-            activityDisplayMetrics.density = appDisplayMetrics.heightPixels / size;
+            activityDisplayMetrics.density = appDisplayMetrics.widthPixels / (float) size;
         }
         activityDisplayMetrics.densityDpi = (int) (160 * activityDisplayMetrics.density);
         activityDisplayMetrics.scaledDensity = activityDisplayMetrics.density * (systemDisplayMetrics.scaledDensity / systemDisplayMetrics.density);
@@ -51,6 +70,16 @@ public class ScreenAdaptUtils {
         appDisplayMetrics.density = activityDisplayMetrics.density;
         appDisplayMetrics.scaledDensity = activityDisplayMetrics.scaledDensity;
         appDisplayMetrics.densityDpi = activityDisplayMetrics.densityDpi;
+    }
+
+    /**
+     * 获取状态栏的高度
+     * @return 状态栏的高度
+     */
+    public static int getStatusBarHeight() {
+        Resources resources = Resources.getSystem();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        return resources.getDimensionPixelSize(resourceId);
     }
 
 }
