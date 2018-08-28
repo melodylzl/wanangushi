@@ -55,7 +55,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.byvoid.wanangushi.activity.HomeActivity"
+        <activity android:name="com.byvoid.wanangushi.module.home.HomeActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -66,27 +66,27 @@
         </activity>
 
         <activity
-            android:name="com.byvoid.wanangushi.activity.StoryActivity"
+            android:name="com.byvoid.wanangushi.module.story.activity.StoryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.byvoid.wanangushi.activity.PhotoViewerActivity"
+            android:name="com.byvoid.wanangushi.module.photo.PhotoViewerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.byvoid.wanangushi.activity.CreateStoryActivity"
+            android:name="com.byvoid.wanangushi.module.story.activity.CreateStoryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.byvoid.wanangushi.activity.SelectRoleActivity"
+            android:name="com.byvoid.wanangushi.module.story.activity.SelectRoleActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.byvoid.wanangushi.activity.CreateRoleActivity"
+            android:name="com.byvoid.wanangushi.module.story.activity.CreateRoleActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"/>
         <activity
-            android:name="com.byvoid.wanangushi.activity.CreateStoryDetailActivity"
+            android:name="com.byvoid.wanangushi.module.story.activity.CreateStoryDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"/>
 

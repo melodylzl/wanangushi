@@ -1,11 +1,11 @@
 package com.byvoid.wanangushi.http;
 
-import com.byvoid.wanangushi.model.BaseResponse;
-import com.byvoid.wanangushi.model.Role;
-import com.byvoid.wanangushi.model.Story;
-import com.byvoid.wanangushi.model.StoryDetail;
-import com.byvoid.wanangushi.model.UpdateInfo;
-import com.byvoid.wanangushi.mvp.IBaseCallBack;
+import com.byvoid.wanangushi.base.BaseResponse;
+import com.byvoid.wanangushi.module.story.model.Role;
+import com.byvoid.wanangushi.module.story.model.Story;
+import com.byvoid.wanangushi.module.story.model.StoryDetail;
+import com.byvoid.wanangushi.module.setting.model.UpdateInfo;
+import com.byvoid.wanangushi.module.qiniu.model.UploadTokenResult;
 
 import java.util.List;
 
@@ -41,5 +41,6 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("story/create")
     Observable<BaseResult<BaseResponse>> createStory(@Field("name") String name, @Field("cover") String cover, @Field("talkListJson") String talkListJson);
-
+    @GET("get-upload-token")
+    Observable<BaseResult<UploadTokenResult>> getQiniuUploadToken();
 }

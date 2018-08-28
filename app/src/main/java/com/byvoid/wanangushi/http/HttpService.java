@@ -1,21 +1,17 @@
 package com.byvoid.wanangushi.http;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
-import android.support.v4.content.FileProvider;
 
 import com.byvoid.wanangushi.BuildConfig;
-import com.byvoid.wanangushi.model.BaseResponse;
-import com.byvoid.wanangushi.model.Role;
-import com.byvoid.wanangushi.model.Story;
-import com.byvoid.wanangushi.model.StoryDetail;
-import com.byvoid.wanangushi.model.UpdateInfo;
+import com.byvoid.wanangushi.base.BaseResponse;
+import com.byvoid.wanangushi.module.story.model.Role;
+import com.byvoid.wanangushi.module.story.model.Story;
+import com.byvoid.wanangushi.module.story.model.StoryDetail;
+import com.byvoid.wanangushi.module.setting.model.UpdateInfo;
+import com.byvoid.wanangushi.module.qiniu.model.UploadTokenResult;
 import com.byvoid.wanangushi.utils.AppUtils;
 import com.byvoid.wanangushi.utils.FileIOUtils;
 import com.byvoid.wanangushi.utils.FilePathManager;
-import com.byvoid.wanangushi.utils.LogUtils;
 import com.byvoid.wanangushi.utils.ToastUtils;
 
 import java.io.File;
@@ -27,7 +23,6 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -187,7 +182,13 @@ public class HttpService {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(callBack);
+    }
 
+    public static void getQiniuUploadToken(BaseCallBack<UploadTokenResult> callBack){
+        getApiService().getQiniuUploadToken()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(callBack);
     }
 
 
