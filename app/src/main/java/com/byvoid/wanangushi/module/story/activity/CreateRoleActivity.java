@@ -13,14 +13,21 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.byvoid.wanangushi.R;
 import com.byvoid.wanangushi.base.TakePhotoActivity;
+import com.byvoid.wanangushi.module.qiniu.QiniuUpload;
 import com.byvoid.wanangushi.module.story.eventbus.EventAddRole;
 import com.byvoid.wanangushi.http.BaseCallBack;
 import com.byvoid.wanangushi.http.HttpService;
 import com.byvoid.wanangushi.base.BaseResponse;
+import com.byvoid.wanangushi.utils.LogUtils;
 import com.byvoid.wanangushi.utils.TakePhotoUtils;
+import com.byvoid.wanangushi.utils.ToastUtils;
 
 import org.devio.takephoto.model.TResult;
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -75,19 +82,33 @@ public class CreateRoleActivity extends TakePhotoActivity{
         super.handleOnClick(view);
         switch (view.getId()){
             case R.id.completeBtn:
-                String name = mNameEt.getText().toString();
+                final String name = mNameEt.getText().toString();
                 if (TextUtils.isEmpty(mAvatarUrl) || TextUtils.isEmpty(name)){
                     return;
                 }
-                HttpService.createRole(name, mAvatarUrl, new BaseCallBack<BaseResponse>() {
+                List<String> dataList = new ArrayList<>();
+                dataList.add(mAvatarUrl);
+                QiniuUpload.uploadFile(dataList, new QiniuUpload.IUploadCallBack() {
                     @Override
-                    public void onSuccess(BaseResponse data, String msg) {
-                        EventBus.getDefault().post(new EventAddRole());
+                    public void onSuccess(HashMap<String, String> urlMaps) {
+                        mAvatarUrl = urlMaps.get(mAvatarUrl);
+                        HttpService.createRole(name, mAvatarUrl, new BaseCallBack<BaseResponse>() {
+                            @Override
+                            public void onSuccess(BaseResponse data, String msg) {
+                                EventBus.getDefault().post(new EventAddRole());
+                            }
+
+                            @Override
+                            public void onFail(String msg, int code) {
+
+                            }
+                        });
                     }
 
                     @Override
-                    public void onFail(String msg, int code) {
-
+                    public void onFail(String msg) {
+                        ToastUtils.show(msg);
+                        LogUtils.i("create role","onFail msg=" + msg);
                     }
                 });
                 break;

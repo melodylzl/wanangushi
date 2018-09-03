@@ -29,6 +29,8 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class QiniuUpload {
 
+    private static final String DEFAULT_HOST = "http://pebiy8ka1.bkt.clouddn.com/";
+
     private static UploadManager mUploadManager;
 
     public static synchronized UploadManager getUploadManager(){
@@ -116,16 +118,21 @@ public class QiniuUpload {
                     @Override
                     public void complete(String key, ResponseInfo info, JSONObject res) {
                         if (info.isOK()) {
-                            result.put(data,key);
-                            LogUtils.i("qiniu", "Upload Success");
+                            String url = getUploadUrl(res.optString("key"));
+                            result.put(data,url);
+                            LogUtils.i("qiniu", "Upload Success url = " + url);
                         } else {
-                            LogUtils.i("qiniu", "Upload Fail");
+                            LogUtils.i("qiniu", "Upload Fail ");
                         }
                         LogUtils.i("qiniu", key + ",\r\n " + info + ",\r\n " + res);
                     }
                 }, null);
     }
 
+
+    private static String getUploadUrl(String key){
+        return DEFAULT_HOST + key;
+    }
 
     public interface IUploadCallBack {
 
