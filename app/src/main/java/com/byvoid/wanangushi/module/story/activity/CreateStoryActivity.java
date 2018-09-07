@@ -15,13 +15,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.byvoid.wanangushi.R;
-import com.byvoid.wanangushi.module.story.adapter.RoleRecyclerViewAdapter;
-import com.byvoid.wanangushi.module.story.adapter.StoryContentRecyclerViewAdapter;
+import com.byvoid.wanangushi.module.story.adapter.RoleAdapter;
+import com.byvoid.wanangushi.module.story.adapter.StoryContentAdapter;
 import com.byvoid.wanangushi.base.TakePhotoActivity;
 import com.byvoid.wanangushi.module.story.model.Role;
 import com.byvoid.wanangushi.module.story.model.StoryTalk;
 import com.byvoid.wanangushi.utils.ListUtils;
 import com.byvoid.wanangushi.utils.TakePhotoUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import org.devio.takephoto.model.TResult;
 
@@ -52,10 +53,10 @@ public class CreateStoryActivity extends TakePhotoActivity {
     protected Button mSendBtn;
 
     private List<StoryTalk> mTalkList = new ArrayList<>();
-    private StoryContentRecyclerViewAdapter mTalkAdapter;
+    private StoryContentAdapter mTalkAdapter;
 
     private List<Role> mRoleList = new ArrayList<>();
-    private RoleRecyclerViewAdapter mRoleAdapter;
+    private RoleAdapter mRoleAdapter;
 
     private int mainRoleId;
 
@@ -78,13 +79,13 @@ public class CreateStoryActivity extends TakePhotoActivity {
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
-        mTalkAdapter = new StoryContentRecyclerViewAdapter(this, mTalkList);
+        mTalkAdapter = new StoryContentAdapter(mTalkList);
         mRecyclerView.setAdapter(mTalkAdapter);
 
         layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRoleRecyclerView.setLayoutManager(layoutManager);
-        mRoleAdapter = new RoleRecyclerViewAdapter(this, mRoleList);
+        mRoleAdapter = new RoleAdapter(R.layout.item_role, mRoleList);
         mRoleRecyclerView.setAdapter(mRoleAdapter);
     }
 
@@ -114,6 +115,12 @@ public class CreateStoryActivity extends TakePhotoActivity {
                 return false;
             }
         });
+        mRoleAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                mRoleAdapter.setCurrentIndex(position);
+            }
+        });
     }
 
     @Override
@@ -128,7 +135,7 @@ public class CreateStoryActivity extends TakePhotoActivity {
                 break;
             case R.id.sendBtn:
                 String content = mInputEt.getText().toString();
-                Role role = ListUtils.getItem(mRoleList, mRoleAdapter.getmCurrentIndex());
+                Role role = ListUtils.getItem(mRoleList, mRoleAdapter.getCurrentIndex());
                 if (TextUtils.isEmpty(content) || null == role) {
                     return;
                 }
@@ -167,7 +174,7 @@ public class CreateStoryActivity extends TakePhotoActivity {
         if (null == result || result.getImage() == null) {
             return;
         }
-        Role role = ListUtils.getItem(mRoleList, mRoleAdapter.getmCurrentIndex());
+        Role role = ListUtils.getItem(mRoleList, mRoleAdapter.getCurrentIndex());
         if (null == role || role.getId() == Role.ASIDE_ID) {
             return;
         }

@@ -1,6 +1,7 @@
 package com.byvoid.wanangushi.module.story.model;
 
 
+import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -9,7 +10,7 @@ import java.io.Serializable;
  * @author melody
  * @date 2018/3/23
  */
-public class StoryTalk implements Serializable{
+public class StoryTalk implements Serializable,MultiItemEntity{
     private static final long serialVersionUID = 7564884743499849261L;
 
     public static final int TYPE_TEXT = 0;
@@ -91,5 +92,10 @@ public class StoryTalk implements Serializable{
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    @Override
+    public int getItemType() {
+        return sender;
     }
 }

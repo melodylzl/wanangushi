@@ -9,11 +9,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.byvoid.wanangushi.R;
-import com.byvoid.wanangushi.module.story.adapter.StoryContentRecyclerViewAdapter;
 import com.byvoid.wanangushi.base.BaseActivity;
+import com.byvoid.wanangushi.module.photo.PhotoViewerActivity;
+import com.byvoid.wanangushi.module.story.adapter.StoryContentAdapter;
 import com.byvoid.wanangushi.module.story.model.StoryDetail;
+import com.byvoid.wanangushi.module.story.model.StoryTalk;
 import com.byvoid.wanangushi.module.story.mvp.IStoryActivity;
 import com.byvoid.wanangushi.module.story.mvp.StoryDetailPresenter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -29,7 +35,7 @@ public class StoryActivity extends BaseActivity implements IStoryActivity{
     protected Toolbar mToolBar;
 
     protected int mId;
-    protected StoryContentRecyclerViewAdapter mAdapter;
+    protected StoryContentAdapter mAdapter;
     protected StoryDetailPresenter mStoryDetailPresenter = new StoryDetailPresenter(this);
 
     public static void startToMe(Context context,int id){
@@ -72,10 +78,35 @@ public class StoryActivity extends BaseActivity implements IStoryActivity{
     public void setData(StoryDetail storyDetail) {
         mToolBar.setTitle(storyDetail.getName());
         if (mAdapter == null){
-            mAdapter = new StoryContentRecyclerViewAdapter(this,storyDetail.getStoryTalkList());
+            mAdapter = new StoryContentAdapter(storyDetail.getStoryTalkList());
             mRecyclerView.setAdapter(mAdapter);
+            mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                @SuppressWarnings("unchecked")
+                @Override
+                public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                    List<StoryTalk> storyTalks = (List<StoryTalk>) adapter.getData();
+                    switch (view.getId()){
+                        case R.id.imageIv:
+                            List<String> imageUrlList = new ArrayList<>();
+                            int index = 0;
+                            for (StoryTalk storyTalk : storyTalks) {
+                                if (storyTalk.getType() == StoryTalk.TYPE_IMAGE){
+                                    imageUrlList.add(storyTalk.getImageUrl());
+                                    if (storyTalk.getId() == storyTalks.get(position).getId()){
+                                        index = imageUrlList.size() - 1;
+                                    }
+                                }
+                            }
+                            PhotoViewerActivity.show(getContext(),imageUrlList,index);
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+            });
         }else{
-            mAdapter.setData(storyDetail.getStoryTalkList());
+            mAdapter.setNewData(storyDetail.getStoryTalkList());
         }
     }
 }

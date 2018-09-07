@@ -11,14 +11,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.byvoid.wanangushi.R;
-import com.byvoid.wanangushi.adapter.OnItemClickListener;
-import com.byvoid.wanangushi.module.story.adapter.RoleRecyclerViewAdapter;
 import com.byvoid.wanangushi.base.BaseActivity;
-import com.byvoid.wanangushi.module.story.eventbus.EventAddRole;
 import com.byvoid.wanangushi.http.BaseCallBack;
 import com.byvoid.wanangushi.http.HttpService;
+import com.byvoid.wanangushi.module.story.adapter.RoleAdapter;
+import com.byvoid.wanangushi.module.story.eventbus.EventAddRole;
 import com.byvoid.wanangushi.module.story.model.Role;
-import com.byvoid.wanangushi.utils.ListUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,7 +41,7 @@ public class SelectRoleActivity extends BaseActivity{
     @BindView(R.id.addRoleTv)
     protected TextView mAddRoleTv;
     private List<Role> mRoleList = new ArrayList<>();
-    private RoleRecyclerViewAdapter mRoleAdapter;
+    private RoleAdapter mRoleAdapter;
 
     public static void startToMe(Context context,int requestCode){
         Intent intent = new Intent(context,SelectRoleActivity.class);
@@ -60,11 +59,11 @@ public class SelectRoleActivity extends BaseActivity{
         super.bindData();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),4);
         mRecyclerView.setLayoutManager(gridLayoutManager);
-        mRoleAdapter = new RoleRecyclerViewAdapter(this,mRoleList);
-        mRoleAdapter.setOnItemClickListener(new OnItemClickListener() {
+        mRoleAdapter = new RoleAdapter(R.layout.item_role,mRoleList);
+        mRoleAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                Role role = ListUtils.getItem(mRoleList,position);
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Role role = (Role) adapter.getItem(position);
                 if (role != null){
                     Intent intent = new Intent();
                     intent.putExtra("role",role);
