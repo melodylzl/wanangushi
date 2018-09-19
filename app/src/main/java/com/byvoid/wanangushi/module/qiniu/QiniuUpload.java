@@ -29,7 +29,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class QiniuUpload {
 
-    private static final String DEFAULT_HOST = "http://pebiy8ka1.bkt.clouddn.com/";
+    private static final String DEFAULT_HOST = "http://img.melodylzl.top/";
 
     private static UploadManager mUploadManager;
 
@@ -76,28 +76,9 @@ public class QiniuUpload {
 
                     @Override
                     public void onNext(final String token) {
-                        Observable.fromIterable(dataList)
-                                .subscribe(new Observer<String>() {
-                                    @Override
-                                    public void onSubscribe(Disposable d) {
-
-                                    }
-
-                                    @Override
-                                    public void onNext(String data) {
-                                        uploadFile(data,token,result);
-                                    }
-
-                                    @Override
-                                    public void onError(Throwable e) {
-                                        callBack.onFail("上传文件失败,e="+e);
-                                    }
-
-                                    @Override
-                                    public void onComplete() {
-                                        callBack.onSuccess(result);
-                                    }
-                                });
+                        for (String data : dataList){
+                            uploadFile(data,token,result,dataList.size(),callBack);
+                        }
                     }
 
                     @Override
@@ -112,7 +93,7 @@ public class QiniuUpload {
                 });
     }
 
-    private static void uploadFile(final String data, String token, final HashMap<String,String> result){
+    private static void uploadFile(final String data, String token, final HashMap<String,String> result, final int size, final IUploadCallBack callBack){
         getUploadManager().put(data, null, token,
                 new UpCompletionHandler() {
                     @Override
@@ -120,8 +101,12 @@ public class QiniuUpload {
                         if (info.isOK()) {
                             String url = getUploadUrl(res.optString("key"));
                             result.put(data,url);
+                            if (result.size() == size){
+                                callBack.onSuccess(result);
+                            }
                             LogUtils.i("qiniu", "Upload Success url = " + url);
                         } else {
+                            callBack.onFail("上传失败");
                             LogUtils.i("qiniu", "Upload Fail ");
                         }
                         LogUtils.i("qiniu", key + ",\r\n " + info + ",\r\n " + res);
