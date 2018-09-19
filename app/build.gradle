@@ -27,7 +27,7 @@ android {
             minifyEnabled false
             shrinkResources false
             zipAlignEnabled false
-            buildConfigField("String","SERVER_URL","\"http://47.106.22.65:3389\"")
+            buildConfigField("String","SERVER_URL","\"http://wags.melodylzl.top\"")
 //            buildConfigField("String","SERVER_URL","\"http://10.32.8.147:3389\"")
         }
 
@@ -38,7 +38,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
 
-            buildConfigField("String","SERVER_URL","\"http://47.106.22.65:3389\"")
+            buildConfigField("String","SERVER_URL","\"http://wags.melodylzl.top\"")
         }
     }
 
