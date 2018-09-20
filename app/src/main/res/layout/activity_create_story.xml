@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:toolbar="http://schemas.android.com/apk/res-auto"
@@ -14,7 +15,21 @@
         toolbar:title="@string/create_story"
         toolbar:titleTextColor="@color/white"
         toolbar:theme="@style/AppTheme"
-        toolbar:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        toolbar:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:id="@+id/nextTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="end"
+            android:padding="@dimen/dp_4"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="下一步"/>
+
+
+    </android.support.v7.widget.Toolbar>
 
 
     <android.support.v7.widget.RecyclerView
@@ -24,43 +39,74 @@
         android:layout_weight="1"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:paddingBottom="15dp"/>
+        android:paddingBottom="8dp"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/roleRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"/>
-
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:background="#f2f3f5">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/roleRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="8dp"
+            toolbar:layout_constraintStart_toStartOf="parent"
+            toolbar:layout_constraintEnd_toStartOf="@+id/addRoleBtn" />
+
+        <Button
+            android:id="@+id/addRoleBtn"
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="+ 添加"
+            android:textSize="12sp"
+            toolbar:layout_constraintBottom_toTopOf="@+id/inputEditText"
+            toolbar:layout_constraintEnd_toEndOf="parent"
+            toolbar:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/divider"
+            style="@style/vertical_divider"
+            toolbar:layout_constraintTop_toBottomOf="@+id/roleRecyclerView"/>
+
 
         <EditText
             android:id="@+id/inputEditText"
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"/>
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            toolbar:layout_constraintEnd_toStartOf="@+id/photoIv"
+            toolbar:layout_constraintStart_toStartOf="parent"
+            toolbar:layout_constraintTop_toBottomOf="@+id/divider" />
 
         <ImageView
             android:id="@+id/photoIv"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:src="@mipmap/icon_img"/>
-
-        <ImageView
-            android:id="@+id/roleIv"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@mipmap/icon_role"/>
+            android:layout_marginEnd="8dp"
+            android:src="@mipmap/icon_img"
+            toolbar:layout_constraintBottom_toBottomOf="parent"
+            toolbar:layout_constraintEnd_toStartOf="@+id/sendBtn"
+            toolbar:layout_constraintTop_toBottomOf="@+id/divider" />
 
         <Button
             android:id="@+id/sendBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/send" />
+            android:layout_width="60dp"
+            android:layout_height="40dp"
+            android:textSize="12sp"
+            android:text="@string/send"
+            toolbar:layout_constraintBottom_toBottomOf="parent"
+            toolbar:layout_constraintEnd_toEndOf="parent"
+            toolbar:layout_constraintTop_toBottomOf="@+id/divider"
+            android:visibility="gone"/>
 
-    </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
 
 
 

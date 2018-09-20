@@ -8,4 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="vertical_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dip</item>
+        <item name="android:background">#d9dadb</item>
+    </style>
+
+    <style name="horizontal_divider">
+        <item name="android:layout_width">0.5dip</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">#d9dadb</item>
+    </style>
+
 </resources>

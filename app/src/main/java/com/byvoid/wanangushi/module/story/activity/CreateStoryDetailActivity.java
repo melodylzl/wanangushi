@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.byvoid.wanangushi.R;
@@ -45,8 +46,8 @@ public class CreateStoryDetailActivity extends TakePhotoActivity{
     protected ImageView mCoverIv;
     @BindView(R.id.nameEt)
     protected EditText mNameEt;
-    @BindView(R.id.completeBtn)
-    protected Button mCompleteBtn;
+    @BindView(R.id.publishTv)
+    protected TextView mPublishTv;
 
     private String mCoverUrl;
 
@@ -85,16 +86,17 @@ public class CreateStoryDetailActivity extends TakePhotoActivity{
             }
         });
         mCoverIv.setOnClickListener(this);
-        mCompleteBtn.setOnClickListener(this);
+        mPublishTv.setOnClickListener(this);
     }
 
     @Override
     protected void handleOnClick(View view) {
         super.handleOnClick(view);
         switch (view.getId()){
-            case R.id.completeBtn:
+            case R.id.publishTv:
                 String name = mNameEt.getText().toString();
                 if (TextUtils.isEmpty(mCoverUrl) || TextUtils.isEmpty(name)){
+                    ToastUtils.show("请添加故事封面或输入故事标题");
                     return;
                 }
                 Story story = new Story();

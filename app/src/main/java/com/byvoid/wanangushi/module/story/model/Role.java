@@ -50,4 +50,22 @@ public class Role implements Serializable{
     public void setAvatar(String avatar) {
         this.mAvatar = avatar;
     }
+
+    public static Role getAsideRole(){
+        Role role = new Role();
+        role.setId(ASIDE_ID);
+        role.setName("旁白");
+        role.setAvatar("");
+        return role;
+    }
+
+    private boolean mIsSelected = false;
+
+    public void setSelected(boolean selected) {
+        mIsSelected = selected;
+    }
+
+    public boolean isSelected() {
+        return mIsSelected;
+    }
 }

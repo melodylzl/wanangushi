@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.byvoid.wanangushi.R;
@@ -23,6 +24,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,8 +40,10 @@ public class SelectRoleActivity extends BaseActivity{
     protected RecyclerView mRecyclerView;
     @BindView(R.id.toolBar)
     protected Toolbar mToolBar;
-    @BindView(R.id.addRoleTv)
-    protected TextView mAddRoleTv;
+    @BindView(R.id.completeTv)
+    protected TextView mCompleteTv;
+    @BindView(R.id.createRoleBtn)
+    protected Button mCreateRoleBtn;
     private List<Role> mRoleList = new ArrayList<>();
     private RoleAdapter mRoleAdapter;
 
@@ -60,18 +64,6 @@ public class SelectRoleActivity extends BaseActivity{
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),4);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRoleAdapter = new RoleAdapter(R.layout.item_role,mRoleList);
-        mRoleAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Role role = (Role) adapter.getItem(position);
-                if (role != null){
-                    Intent intent = new Intent();
-                    intent.putExtra("role",role);
-                    setResult(Activity.RESULT_OK,intent);
-                    finish();
-                }
-            }
-        });
         mRecyclerView.setAdapter(mRoleAdapter);
         getData();
     }
@@ -86,7 +78,18 @@ public class SelectRoleActivity extends BaseActivity{
                 finish();
             }
         });
-        mAddRoleTv.setOnClickListener(this);
+        mCreateRoleBtn.setOnClickListener(this);
+        mCompleteTv.setOnClickListener(this);
+        mRoleAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Role role = (Role) adapter.getItem(position);
+                if (role != null){
+                    role.setSelected(!role.isSelected());
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     @Override
@@ -99,8 +102,21 @@ public class SelectRoleActivity extends BaseActivity{
     protected void handleOnClick(View view) {
         super.handleOnClick(view);
         switch (view.getId()){
-            case R.id.addRoleTv:
+            case R.id.createRoleBtn:
                 CreateRoleActivity.startToMe(getContext());
+                break;
+            case R.id.completeTv:
+                List<Role> selectedRoleList = new ArrayList<>();
+                for (Role role : mRoleList){
+                    if (role.isSelected()){
+                        role.setSelected(false);
+                        selectedRoleList.add(role);
+                    }
+                }
+                Intent intent = new Intent();
+                intent.putExtra("roles",(Serializable) selectedRoleList);
+                setResult(Activity.RESULT_OK,intent);
+                finish();
                 break;
             default:
                 break;

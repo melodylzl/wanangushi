@@ -14,20 +14,35 @@
         toolbar:title="@string/select_role"
         toolbar:titleTextColor="@color/white"
         toolbar:theme="@style/AppTheme"
-        toolbar:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        toolbar:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-    <TextView
-        android:id="@+id/addRoleTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+添加自定义角色"/>
+        <TextView
+            android:id="@+id/completeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="end"
+            android:padding="@dimen/dp_4"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:text="@string/complete"/>
+
+    </android.support.v7.widget.Toolbar>
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:padding="15dp" />
+
+    <Button
+        android:id="@+id/createRoleBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="+ 添加自定义角色"/>
 
 
 

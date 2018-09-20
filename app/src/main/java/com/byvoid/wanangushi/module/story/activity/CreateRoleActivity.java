@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.byvoid.wanangushi.R;
@@ -43,8 +44,8 @@ public class CreateRoleActivity extends TakePhotoActivity{
     protected ImageView mAvatarIv;
     @BindView(R.id.nameEt)
     protected EditText mNameEt;
-    @BindView(R.id.completeBtn)
-    protected Button mCompleteBtn;
+    @BindView(R.id.publishTv)
+    protected TextView mPublishTv;
 
     private String mAvatarUrl;
 
@@ -74,16 +75,17 @@ public class CreateRoleActivity extends TakePhotoActivity{
             }
         });
         mAvatarIv.setOnClickListener(this);
-        mCompleteBtn.setOnClickListener(this);
+        mPublishTv.setOnClickListener(this);
     }
 
     @Override
     protected void handleOnClick(View view) {
         super.handleOnClick(view);
         switch (view.getId()){
-            case R.id.completeBtn:
+            case R.id.publishTv:
                 final String name = mNameEt.getText().toString();
                 if (TextUtils.isEmpty(mAvatarUrl) || TextUtils.isEmpty(name)){
+                    ToastUtils.show("请添加角色头像或输入角色名称");
                     return;
                 }
                 List<String> dataList = new ArrayList<>();
