@@ -1,5 +1,6 @@
 package com.byvoid.wanangushi.module.story.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,10 +54,10 @@ public class CreateStoryDetailActivity extends TakePhotoActivity{
 
     private List<StoryTalk> mStoryTalkList;
 
-    public static void startToMe(Context context, List<StoryTalk> storyTalkList){
+    public static void startToMe(Context context, List<StoryTalk> storyTalkList,int requestCode){
         Intent intent = new Intent(context,CreateStoryDetailActivity.class);
         intent.putExtra("storyTalkList",(Serializable) storyTalkList);
-        context.startActivity(intent);
+        ((Activity)context).startActivityForResult(intent,requestCode);
     }
 
     @Override
@@ -144,6 +145,8 @@ public class CreateStoryDetailActivity extends TakePhotoActivity{
                     @Override
                     public void onSuccess(BaseResponse data, String msg) {
                         ToastUtils.show(msg);
+                        setResult(Activity.RESULT_OK);
+                        finish();
                     }
 
                     @Override

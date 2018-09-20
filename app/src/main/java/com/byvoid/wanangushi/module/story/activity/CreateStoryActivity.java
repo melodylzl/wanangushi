@@ -181,7 +181,7 @@ public class CreateStoryActivity extends TakePhotoActivity {
                     ToastUtils.show("请输入故事内容");
                     return;
                 }
-                CreateStoryDetailActivity.startToMe(getContext(),mTalkList);
+                CreateStoryDetailActivity.startToMe(getContext(),mTalkList,2);
                 break;
             case R.id.photoIv:
                 if (null == mSelectedRole){
@@ -243,6 +243,8 @@ public class CreateStoryActivity extends TakePhotoActivity {
                 }
                 mRoleAdapter.notifyDataSetChanged();
             }
+        }else if (requestCode == 2 && resultCode == Activity.RESULT_OK){
+            finish();
         }
     }
 
