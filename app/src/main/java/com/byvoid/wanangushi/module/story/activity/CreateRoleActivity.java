@@ -19,6 +19,7 @@ import com.byvoid.wanangushi.module.story.eventbus.EventAddRole;
 import com.byvoid.wanangushi.http.BaseCallBack;
 import com.byvoid.wanangushi.http.HttpService;
 import com.byvoid.wanangushi.base.BaseResponse;
+import com.byvoid.wanangushi.utils.DialogUtils;
 import com.byvoid.wanangushi.utils.LogUtils;
 import com.byvoid.wanangushi.utils.TakePhotoUtils;
 import com.byvoid.wanangushi.utils.ToastUtils;
@@ -31,6 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * @author melody
@@ -90,6 +92,7 @@ public class CreateRoleActivity extends TakePhotoActivity{
                 }
                 List<String> dataList = new ArrayList<>();
                 dataList.add(mAvatarUrl);
+                final SweetAlertDialog sweetAlertDialog = DialogUtils.showProgressDialog(getContext(),"创建中...");
                 QiniuUpload.uploadFile(dataList, new QiniuUpload.IUploadCallBack() {
                     @Override
                     public void onSuccess(HashMap<String, String> urlMaps) {
@@ -97,12 +100,18 @@ public class CreateRoleActivity extends TakePhotoActivity{
                         HttpService.createRole(name, mAvatarUrl, new BaseCallBack<BaseResponse>() {
                             @Override
                             public void onSuccess(BaseResponse data, String msg) {
+                                sweetAlertDialog.setTitleText("");
+                                sweetAlertDialog.setConfirmText(msg);
+                                sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                                sweetAlertDialog.dismiss();
                                 EventBus.getDefault().post(new EventAddRole());
+                                finish();
                             }
 
                             @Override
                             public void onFail(String msg, int code) {
-
+                                sweetAlertDialog.dismiss();
+                                ToastUtils.show(msg);
                             }
                         });
                     }
@@ -110,6 +119,7 @@ public class CreateRoleActivity extends TakePhotoActivity{
                     @Override
                     public void onFail(String msg) {
                         ToastUtils.show(msg);
+                        sweetAlertDialog.dismiss();
                         LogUtils.i("create role","onFail msg=" + msg);
                     }
                 });

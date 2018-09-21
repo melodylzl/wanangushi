@@ -21,6 +21,7 @@ import com.byvoid.wanangushi.base.BaseResponse;
 import com.byvoid.wanangushi.module.story.model.Story;
 import com.byvoid.wanangushi.module.story.model.StoryTalk;
 import com.byvoid.wanangushi.module.qiniu.QiniuUpload;
+import com.byvoid.wanangushi.utils.DialogUtils;
 import com.byvoid.wanangushi.utils.LogUtils;
 import com.byvoid.wanangushi.utils.TakePhotoUtils;
 import com.byvoid.wanangushi.utils.ToastUtils;
@@ -34,6 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 /**
  * @author melody
@@ -131,6 +133,7 @@ public class CreateStoryDetailActivity extends TakePhotoActivity{
                 uploadImageList.add(storyTalk.getImageUrl());
             }
         }
+        final SweetAlertDialog sweetAlertDialog = DialogUtils.showProgressDialog(getContext(),"创建中...");
         QiniuUpload.uploadFile(uploadImageList, new QiniuUpload.IUploadCallBack() {
             @Override
             public void onSuccess(HashMap<String, String> urlMaps) {
@@ -144,13 +147,17 @@ public class CreateStoryDetailActivity extends TakePhotoActivity{
                 HttpService.createStory(story.getName(), story.getCoverUrl(), gson.toJson(storyTalkList), new BaseCallBack<BaseResponse>() {
                     @Override
                     public void onSuccess(BaseResponse data, String msg) {
-                        ToastUtils.show(msg);
+                        sweetAlertDialog.setTitleText("");
+                        sweetAlertDialog.setConfirmText(msg);
+                        sweetAlertDialog.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                        sweetAlertDialog.dismiss();
                         setResult(Activity.RESULT_OK);
                         finish();
                     }
 
                     @Override
                     public void onFail(String msg, int code) {
+                        sweetAlertDialog.dismiss();
                         ToastUtils.show(msg);
                     }
                 });
@@ -158,6 +165,7 @@ public class CreateStoryDetailActivity extends TakePhotoActivity{
 
             @Override
             public void onFail(String msg) {
+                sweetAlertDialog.dismiss();
                 ToastUtils.show(msg);
                 LogUtils.i("UploadStoryHelper","onFail msg=" + msg);
             }
