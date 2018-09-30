@@ -3,7 +3,9 @@ package com.byvoid.wanangushi.http;
 import android.content.Context;
 
 import com.byvoid.wanangushi.BuildConfig;
+import com.byvoid.wanangushi.app.UtilsApplication;
 import com.byvoid.wanangushi.base.BaseResponse;
+import com.byvoid.wanangushi.constant.MemoryConstants;
 import com.byvoid.wanangushi.module.story.model.Role;
 import com.byvoid.wanangushi.module.story.model.Story;
 import com.byvoid.wanangushi.module.story.model.StoryDetail;
@@ -24,6 +26,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -64,6 +67,9 @@ public class HttpService {
             loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             httpClientBuilder.addInterceptor(loggingInterceptor);
         }
+        File cacheFile = new File(FilePathManager.getOkhttpCachePath());
+        httpClientBuilder.cache(new Cache(cacheFile,10 * MemoryConstants.MB));
+        httpClientBuilder.addInterceptor(new CacheInterceptor());
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(Server.HOST_BASE)

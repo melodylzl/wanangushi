@@ -71,6 +71,7 @@ public class FilePathManager {
 
     public static final String DOWNLOAD_PATH = "/download";
     public static final String IMAGE_PATH = "/image";
+    public static final String OKHTTP_CACHE_PATH = "/okHttp";
 
     /**
      * 获取app下载文件目录
@@ -86,6 +87,14 @@ public class FilePathManager {
      */
     public static String getImagePath(){
         return getExternalFilesPath() + IMAGE_PATH;
+    }
+
+    /**
+     * 获取OkHttp内存缓存目录的绝对路径
+     * @return /data/data/<package_name>/cache/okHttp
+     */
+    public static String getOkhttpCachePath(){
+        return getMemoryCachePath() + OKHTTP_CACHE_PATH;
     }
 
 
