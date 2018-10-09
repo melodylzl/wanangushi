@@ -62,7 +62,7 @@ android {
 
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = outputFileName.replace("app", "wanangushi")
+            outputFileName = outputFileName.replace("app", "wanangushi-" + defaultConfig.versionCode)
         }
     }
 
