@@ -6,6 +6,7 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.byvoid.wanangushi.BuildConfig;
 import com.byvoid.wanangushi.R;
 import com.byvoid.wanangushi.module.story.activity.CreateStoryActivity;
 import com.byvoid.wanangushi.base.BaseFragment;
@@ -50,6 +51,7 @@ public class SettingFragment extends BaseFragment implements IUpdateView{
     protected void bindData() {
         super.bindData();
         mVersionTv.setText(ConfigUtils.getVersionName());
+        mCreateStoryView.setVisibility(BuildConfig.DEBUG ? View.VISIBLE : View.GONE);
     }
 
     @Override
