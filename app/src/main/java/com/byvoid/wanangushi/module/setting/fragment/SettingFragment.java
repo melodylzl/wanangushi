@@ -81,7 +81,7 @@ public class SettingFragment extends BaseFragment implements IUpdateView{
             return;
         }
         int versionCode = ConfigUtils.getVersionCode();
-        if (versionCode <= updateInfo.getVersionCode()){
+        if (versionCode < updateInfo.getVersionCode()){
             DialogUtils.show(getActivity(), updateInfo.getTitle(), updateInfo.getContent(), "更新", new MaterialDialog.SingleButtonCallback() {
                 @Override
                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
