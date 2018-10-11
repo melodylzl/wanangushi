@@ -3,7 +3,7 @@ package com.byvoid.wanangushi.utils;
 import android.support.annotation.StringRes;
 import android.widget.Toast;
 
-import com.byvoid.wanangushi.app.UtilsApplication;
+import com.byvoid.wanangushi.app.UtilsApplicationLike;
 
 /**
  * @author melody
@@ -20,11 +20,11 @@ public class ToastUtils {
     }
 
     public static void show(String msg,int time){
-        Toast.makeText(UtilsApplication.getInstance(),msg,time).show();
+        Toast.makeText(UtilsApplicationLike.getAppContext(),msg,time).show();
     }
 
     public static void show(@StringRes int resId,int time){
-        Toast.makeText(UtilsApplication.getInstance(),resId,time).show();
+        Toast.makeText(UtilsApplicationLike.getAppContext(),resId,time).show();
     }
 
 }

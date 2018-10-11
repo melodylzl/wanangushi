@@ -2,7 +2,7 @@ package com.byvoid.wanangushi.utils;
 
 import android.content.pm.PackageManager;
 
-import com.byvoid.wanangushi.app.UtilsApplication;
+import com.byvoid.wanangushi.app.UtilsApplicationLike;
 
 /**
  * @author melody
@@ -17,8 +17,8 @@ public class ConfigUtils {
     public static int getVersionCode(){
         int versionCode = 0;
         try {
-            versionCode = UtilsApplication.getInstance().getPackageManager().getPackageInfo(
-                    UtilsApplication.getInstance().getPackageName(), 0).versionCode;
+            versionCode = UtilsApplicationLike.getAppContext().getPackageManager().getPackageInfo(
+                    UtilsApplicationLike.getAppContext().getPackageName(), 0).versionCode;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
@@ -32,8 +32,8 @@ public class ConfigUtils {
     public static String getVersionName() {
         String verName = "";
         try {
-            verName = UtilsApplication.getInstance().getPackageManager().getPackageInfo(
-                    UtilsApplication.getInstance().getPackageName(), 0).versionName;
+            verName = UtilsApplicationLike.getAppContext().getPackageManager().getPackageInfo(
+                    UtilsApplicationLike.getAppContext().getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package com.byvoid.wanangushi.module.setting.fragment;
 
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
@@ -14,10 +15,12 @@ import com.byvoid.wanangushi.http.HttpService;
 import com.byvoid.wanangushi.module.setting.model.UpdateInfo;
 import com.byvoid.wanangushi.module.setting.mvp.IUpdateView;
 import com.byvoid.wanangushi.module.setting.mvp.UpdatePresenter;
+import com.byvoid.wanangushi.app.UtilsApplicationLike;
 import com.byvoid.wanangushi.utils.ConfigUtils;
 import com.byvoid.wanangushi.utils.DialogUtils;
 import com.byvoid.wanangushi.utils.ResourceUtils;
 import com.byvoid.wanangushi.utils.ToastUtils;
+import com.tencent.tinker.lib.tinker.TinkerInstaller;
 
 import butterknife.BindView;
 
@@ -65,7 +68,8 @@ public class SettingFragment extends BaseFragment implements IUpdateView{
     protected void handleOnClick(View view) {
         switch (view.getId()){
             case R.id.checkUpdateView:
-                mUpdatePresenter.getUpdateInfo();
+//                mUpdatePresenter.getUpdateInfo();
+                TinkerInstaller.onReceiveUpgradePatch(UtilsApplicationLike.getAppContext(), Environment.getExternalStorageDirectory().getAbsolutePath() + "/patch_signed_7zip.apk");
                 break;
             case R.id.createStoryView:
                 CreateStoryActivity.startToMe(getContext());

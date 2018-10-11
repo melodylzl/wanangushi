@@ -10,9 +10,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-import com.byvoid.wanangushi.app.UtilsApplication;
 import com.byvoid.wanangushi.constant.MemoryConstants;
 import com.byvoid.wanangushi.constant.TimeConstants;
+import com.byvoid.wanangushi.app.UtilsApplicationLike;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -561,7 +561,7 @@ public final class ConvertUtils {
      * @return drawable
      */
     public static Drawable bitmap2Drawable(final Bitmap bitmap) {
-        return bitmap == null ? null : new BitmapDrawable(UtilsApplication.getInstance().getResources(), bitmap);
+        return bitmap == null ? null : new BitmapDrawable(UtilsApplicationLike.getAppContext().getResources(), bitmap);
     }
 
     /**
@@ -616,7 +616,7 @@ public final class ConvertUtils {
      * @return px 值
      */
     public static int dp2px(final float dpValue) {
-        final float scale = UtilsApplication.getInstance().getResources().getDisplayMetrics().density;
+        final float scale = UtilsApplicationLike.getAppContext().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
@@ -627,7 +627,7 @@ public final class ConvertUtils {
      * @return dp 值
      */
     public static int px2dp(final float pxValue) {
-        final float scale = UtilsApplication.getInstance().getResources().getDisplayMetrics().density;
+        final float scale = UtilsApplicationLike.getAppContext().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
@@ -638,7 +638,7 @@ public final class ConvertUtils {
      * @return px 值
      */
     public static int sp2px(final float spValue) {
-        final float fontScale = UtilsApplication.getInstance().getResources().getDisplayMetrics().scaledDensity;
+        final float fontScale = UtilsApplicationLike.getAppContext().getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
 
@@ -649,7 +649,7 @@ public final class ConvertUtils {
      * @return sp 值
      */
     public static int px2sp(final float pxValue) {
-        final float fontScale = UtilsApplication.getInstance().getResources().getDisplayMetrics().scaledDensity;
+        final float fontScale = UtilsApplicationLike.getAppContext().getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
     }
 

@@ -5,7 +5,7 @@ import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 
-import com.byvoid.wanangushi.app.UtilsApplication;
+import com.byvoid.wanangushi.app.UtilsApplicationLike;
 
 /**
  * 屏幕适配方案
@@ -21,7 +21,7 @@ public class ScreenAdaptUtils {
      */
     public static void cancelCustomDensity(@NonNull Activity activity){
         final DisplayMetrics systemDisplayMetrics = Resources.getSystem().getDisplayMetrics();
-        final DisplayMetrics appDisplayMetrics = UtilsApplication.getInstance().getResources().getDisplayMetrics();
+        final DisplayMetrics appDisplayMetrics = UtilsApplicationLike.getAppContext().getResources().getDisplayMetrics();
         final DisplayMetrics activityDisplayMetrics = activity.getResources().getDisplayMetrics();
         activityDisplayMetrics.density = systemDisplayMetrics.density;
         activityDisplayMetrics.scaledDensity = systemDisplayMetrics.scaledDensity;
@@ -57,7 +57,7 @@ public class ScreenAdaptUtils {
      */
     public static void setCustomDensity(@NonNull Activity activity, int size, boolean isVertical){
         final DisplayMetrics systemDisplayMetrics = Resources.getSystem().getDisplayMetrics();
-        final DisplayMetrics appDisplayMetrics = UtilsApplication.getInstance().getResources().getDisplayMetrics();
+        final DisplayMetrics appDisplayMetrics = UtilsApplicationLike.getAppContext().getResources().getDisplayMetrics();
         final DisplayMetrics activityDisplayMetrics = activity.getResources().getDisplayMetrics();
         if (isVertical){
             activityDisplayMetrics.density = appDisplayMetrics.heightPixels / (float) size;

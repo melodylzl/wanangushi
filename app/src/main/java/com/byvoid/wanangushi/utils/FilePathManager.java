@@ -2,7 +2,7 @@ package com.byvoid.wanangushi.utils;
 
 import android.os.Environment;
 
-import com.byvoid.wanangushi.app.UtilsApplication;
+import com.byvoid.wanangushi.app.UtilsApplicationLike;
 
 import java.io.File;
 
@@ -19,7 +19,7 @@ public class FilePathManager {
      * @return /data/data/<package_name>/cache
      */
     public static String getMemoryCachePath(){
-        return UtilsApplication.getInstance().getCacheDir().getPath();
+        return UtilsApplicationLike.getAppContext().getCacheDir().getPath();
     }
 
     /**
@@ -27,7 +27,7 @@ public class FilePathManager {
      * @return /data/data/<package_name>/files
      */
     public static String getMemoryFilesPath(){
-        return UtilsApplication.getInstance().getFilesDir().getPath();
+        return UtilsApplicationLike.getAppContext().getFilesDir().getPath();
     }
 
     /**
@@ -37,7 +37,7 @@ public class FilePathManager {
      */
     public static String getExternalCachePath(){
         if (isExistSDCard()){
-            File externalCacheFile = UtilsApplication.getInstance().getExternalCacheDir();
+            File externalCacheFile = UtilsApplicationLike.getAppContext().getExternalCacheDir();
             if (externalCacheFile != null){
                 return externalCacheFile.getPath();
             }
@@ -52,7 +52,7 @@ public class FilePathManager {
      */
     public static String getExternalFilesPath(){
         if (isExistSDCard()){
-            File externalFiles = UtilsApplication.getInstance().getExternalFilesDir(null);
+            File externalFiles = UtilsApplicationLike.getAppContext().getExternalFilesDir(null);
             if (externalFiles != null){
                 return externalFiles.getPath();
             }

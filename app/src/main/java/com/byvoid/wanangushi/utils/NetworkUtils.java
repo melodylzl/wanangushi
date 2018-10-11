@@ -4,7 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.byvoid.wanangushi.app.UtilsApplication;
+import com.byvoid.wanangushi.app.UtilsApplicationLike;
 
 /**
  * @author melody
@@ -18,7 +18,7 @@ public class NetworkUtils {
      * @return true 是 false 否
      */
     public static boolean isNetWorkConnected(){
-        ConnectivityManager mConnectivityManager  = (ConnectivityManager) UtilsApplication.getInstance()
+        ConnectivityManager mConnectivityManager  = (ConnectivityManager) UtilsApplicationLike.getAppContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (mConnectivityManager == null){
             return false;
@@ -32,7 +32,7 @@ public class NetworkUtils {
      * @return true 是 false 否
      */
     public static boolean isWifiConnected(){
-        ConnectivityManager mConnectivityManager = (ConnectivityManager) UtilsApplication.getInstance()
+        ConnectivityManager mConnectivityManager = (ConnectivityManager) UtilsApplicationLike.getAppContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (mConnectivityManager == null){
             return false;
@@ -46,7 +46,7 @@ public class NetworkUtils {
      * @return true 是 false 否
      */
     public static boolean isMobileConnected(){
-        ConnectivityManager mConnectivityManager = (ConnectivityManager) UtilsApplication.getInstance()
+        ConnectivityManager mConnectivityManager = (ConnectivityManager) UtilsApplicationLike.getAppContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         if (mConnectivityManager == null){
             return false;

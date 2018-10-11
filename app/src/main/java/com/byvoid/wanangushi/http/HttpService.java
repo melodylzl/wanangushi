@@ -3,7 +3,6 @@ package com.byvoid.wanangushi.http;
 import android.content.Context;
 
 import com.byvoid.wanangushi.BuildConfig;
-import com.byvoid.wanangushi.app.UtilsApplication;
 import com.byvoid.wanangushi.base.BaseResponse;
 import com.byvoid.wanangushi.constant.MemoryConstants;
 import com.byvoid.wanangushi.module.story.model.Role;
