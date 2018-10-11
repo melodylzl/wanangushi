@@ -68,8 +68,7 @@ public class SettingFragment extends BaseFragment implements IUpdateView{
     protected void handleOnClick(View view) {
         switch (view.getId()){
             case R.id.checkUpdateView:
-//                mUpdatePresenter.getUpdateInfo();
-                TinkerInstaller.onReceiveUpgradePatch(UtilsApplicationLike.getAppContext(), Environment.getExternalStorageDirectory().getAbsolutePath() + "/patch_signed_7zip.apk");
+                mUpdatePresenter.getUpdateInfo();
                 break;
             case R.id.createStoryView:
                 CreateStoryActivity.startToMe(getContext());
