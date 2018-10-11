@@ -1,23 +1,11 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.tencent.tinker.patch'
+apply plugin: 'walle'
+
 
 ext {
     supportVersion = '27.1.1'
     selfVersionName = '1.0.0'
-
-    //for some reason, you may want to ignore tinkerBuild, such as instant run debug build?
-    tinkerEnabled = true
-
-    //for normal build
-    //old apk file to build patch apk
-    tinkerOldApkPath = "${bakPath}/app-1011-10-01-33/wandoujia/app-wandoujia-debug.apk"
-    //proguard mapping file to build patch apk
-    tinkerApplyMappingPath = "${bakPath}/app-debug-1018-17-32-47-mapping.txt"
-    //resource R.txt to build patch apk, must input if there is resource changed
-    tinkerApplyResourcePath = "${bakPath}/app-1011-10-01-33/wandoujia/app-wandoujia-debug-R.txt"
-
-    //only use for build all flavor, if not, just ignore this field
-    tinkerBuildFlavorDirectory = "${bakPath}/app-1011-10-01-33"
 }
 
 android {
@@ -48,7 +36,7 @@ android {
         /**
          * you can use multiDex and install it in your ApplicationLifeCycle implement
          */
-        multiDexEnabled true
+        multiDexEnabled false
         /**
          * buildConfig can change during patch!
          * we can use the newly value when patch
@@ -83,23 +71,23 @@ android {
         }
     }
 
-    flavorDimensions "default"
-
-    productFlavors {
-        yingyongbao {
-            dimension "default"
-        }
-        wandoujia {
-            dimension "default"
-        }
-        xiaomi {
-            dimension "default"
-        }
-    }
-
-    productFlavors.all {
-        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
-    }
+//    flavorDimensions "default"
+//
+//    productFlavors {
+//        yingyongbao {
+//            dimension "default"
+//        }
+//        wandoujia {
+//            dimension "default"
+//        }
+//        xiaomi {
+//            dimension "default"
+//        }
+//    }
+//
+//    productFlavors.all {
+//        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+//    }
 
     android.applicationVariants.all { variant ->
         variant.outputs.all {
@@ -149,7 +137,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.9'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.16'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.jakewharton:butterknife:8.8.1'
@@ -171,8 +159,11 @@ dependencies {
     implementation 'com.tencent.tinker:tinker-android-lib:1.9.9'
     implementation "com.android.support:multidex:1.0.3"
 
+    implementation 'com.meituan.android.walle:library:1.1.6'
+
 }
 
+//#####################  Tinker热更新 start   #####################
 
 def bakPath = file("${buildDir}/bakApk/")
 
@@ -198,6 +189,22 @@ def buildWithTinker() {
 
 def getTinkerBuildFlavorDirectory() {
     return ext.tinkerBuildFlavorDirectory
+}
+
+ext{
+    //for some reason, you may want to ignore tinkerBuild, such as instant run debug build?
+    tinkerEnabled = true
+
+    //for normal build
+    //old apk file to build patch apk
+    tinkerOldApkPath = "${bakPath}/app-1011-10-01-33/wandoujia/app-wandoujia-debug.apk"
+    //proguard mapping file to build patch apk
+    tinkerApplyMappingPath = "${bakPath}/app-debug-1018-17-32-47-mapping.txt"
+    //resource R.txt to build patch apk, must input if there is resource changed
+    tinkerApplyResourcePath = "${bakPath}/app-1011-10-01-33/wandoujia/app-wandoujia-debug-R.txt"
+
+    //only use for build all flavor, if not, just ignore this field
+    tinkerBuildFlavorDirectory = "${bakPath}/app-1011-10-01-33"
 }
 
 if (buildWithTinker()) {
@@ -406,7 +413,7 @@ if (buildWithTinker()) {
         }
     }
 
-    List<String> flavors = new ArrayList<>();
+    List<String> flavors = new ArrayList<>()
     project.android.productFlavors.each { flavor ->
         flavors.add(flavor.name)
     }
@@ -495,7 +502,6 @@ if (buildWithTinker()) {
 }
 
 
-
 task sortPublicTxt() {
     doLast {
         File originalFile = project.file("public.txt")
@@ -510,4 +516,16 @@ task sortPublicTxt() {
             sortedFile.append("${it}\n")
         }
     }
+}
+
+//#####################  Tinker热更新 end   #####################
+
+
+walle {
+    // 指定渠道包的输出路径
+    apkOutputFolder = new File("${project.buildDir}/outputs/channels")
+    // 定制渠道包的APK的文件名称
+    apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}.apk'
+    // 渠道配置文件
+    channelFile = new File("${project.getProjectDir()}/channel")
 }

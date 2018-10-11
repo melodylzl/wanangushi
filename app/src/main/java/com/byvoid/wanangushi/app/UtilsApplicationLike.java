@@ -26,6 +26,7 @@ import android.support.multidex.MultiDex;
 import com.byvoid.wanangushi.tinker.Log.MyLogImp;
 import com.byvoid.wanangushi.tinker.util.SampleApplicationContext;
 import com.byvoid.wanangushi.tinker.util.TinkerManager;
+import com.meituan.android.walle.WalleChannelReader;
 import com.orhanobut.hawk.Hawk;
 import com.orhanobut.hawk.NoEncryption;
 import com.orhanobut.logger.AndroidLogAdapter;
@@ -134,7 +135,9 @@ public class UtilsApplicationLike extends DefaultApplicationLike {
     }
 
     protected void initUMeng(){
-        UMConfigure.init(getApplication(), UMConfigure.DEVICE_TYPE_PHONE, null);
+        String channel = WalleChannelReader.getChannel(getApplication());
+        UMConfigure.init(getApplication(),"5b449e1bb27b0a060f00008b",channel,
+                UMConfigure.DEVICE_TYPE_PHONE, null);
     }
 
     protected void initHawk(){
