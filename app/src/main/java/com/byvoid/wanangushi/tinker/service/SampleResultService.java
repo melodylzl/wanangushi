@@ -20,9 +20,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.byvoid.wanangushi.constant.HawkConstants;
 import com.byvoid.wanangushi.tinker.util.Utils;
+import com.byvoid.wanangushi.utils.FileUtils;
+import com.orhanobut.hawk.Hawk;
 import com.tencent.tinker.lib.service.DefaultTinkerResultService;
 import com.tencent.tinker.lib.service.PatchResult;
+import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.util.TinkerLog;
 import com.tencent.tinker.lib.util.TinkerServiceInternals;
 
@@ -54,9 +58,15 @@ public class SampleResultService extends DefaultTinkerResultService {
             @Override
             public void run() {
                 if (result.isSuccess) {
-                    Toast.makeText(getApplicationContext(), "patch success, please restart process", Toast.LENGTH_LONG).show();
+                    String rawPatchFilePath = result.rawPatchFilePath;
+                    try{
+                        int hashCode = Integer.valueOf(FileUtils.getFileNameNoExtension(rawPatchFilePath));
+                        Hawk.put(HawkConstants.PATCH_KEY,hashCode);
+                    }catch (NumberFormatException e){
+                        TinkerLog.i(TAG,"e = " + e);
+                    }
                 } else {
-                    Toast.makeText(getApplicationContext(), "patch fail, please check reason", Toast.LENGTH_LONG).show();
+                    TinkerLog.i(TAG, "patch fail, please check reason");
                 }
             }
         });

@@ -72,6 +72,7 @@ public class FilePathManager {
     public static final String DOWNLOAD_PATH = "/download";
     public static final String IMAGE_PATH = "/image";
     public static final String OKHTTP_CACHE_PATH = "/okHttp";
+    public static final String PATCH_PATH = "/patch";
 
     /**
      * 获取app下载文件目录
@@ -79,6 +80,14 @@ public class FilePathManager {
      */
     public static String getDownloadPath(){
         return getExternalFilesPath() + DOWNLOAD_PATH;
+    }
+
+    /**
+     * 获取补丁包文件目录
+     * @return /Android/data/<package_name>/files/download/patch
+     */
+    public static String getPatchPath(){
+        return getDownloadPath() + PATCH_PATH;
     }
 
     /**

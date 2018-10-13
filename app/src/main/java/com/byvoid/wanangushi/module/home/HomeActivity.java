@@ -5,11 +5,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 
 import com.byvoid.wanangushi.R;
 import com.byvoid.wanangushi.base.BaseActivity;
+import com.byvoid.wanangushi.constant.HawkConstants;
+import com.byvoid.wanangushi.http.BaseCallBack;
+import com.byvoid.wanangushi.http.HttpService;
 import com.byvoid.wanangushi.module.setting.fragment.SettingFragment;
 import com.byvoid.wanangushi.module.story.fragment.StoryHomeFragment;
+import com.byvoid.wanangushi.tinker.model.PatchInfo;
+import com.orhanobut.hawk.Hawk;
 import com.yinglan.alphatabs.AlphaTabsIndicator;
 
 import java.util.ArrayList;
@@ -40,8 +46,9 @@ public class HomeActivity extends BaseActivity{
         MainAdapter mainAdapter = new MainAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mainAdapter);
         mViewPager.addOnPageChangeListener(mainAdapter);
-
         mAlphaTabsIndicator.setViewPager(mViewPager);
+
+        getPatchInfo();
     }
 
     @Override
@@ -90,5 +97,29 @@ public class HomeActivity extends BaseActivity{
         public void onPageScrollStateChanged(int state) {
 
         }
+    }
+
+    /**
+     * 获取补丁包
+     */
+    public void getPatchInfo(){
+        HttpService.getPatchInfo(new BaseCallBack<PatchInfo>() {
+            @Override
+            public void onSuccess(PatchInfo data, String msg) {
+                String patchUrl = data.getUrl();
+                if (TextUtils.isEmpty(patchUrl)){
+                    return;
+                }
+                Integer cachePatchUrlHashCode = Hawk.get(HawkConstants.PATCH_KEY);
+                if (cachePatchUrlHashCode == null || patchUrl.hashCode() != cachePatchUrlHashCode){
+                    HttpService.downloadPatch(getContext(),patchUrl);
+                }
+            }
+
+            @Override
+            public void onFail(String msg, int code) {
+
+            }
+        });
     }
 }

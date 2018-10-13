@@ -6,6 +6,7 @@ import com.byvoid.wanangushi.module.story.model.Story;
 import com.byvoid.wanangushi.module.story.model.StoryDetail;
 import com.byvoid.wanangushi.module.setting.model.UpdateInfo;
 import com.byvoid.wanangushi.module.qiniu.model.UploadTokenResult;
+import com.byvoid.wanangushi.tinker.model.PatchInfo;
 
 import java.util.List;
 
@@ -31,6 +32,8 @@ public interface ApiService {
     Observable<BaseResult<StoryDetail>> getStoryDetail(@Query("id") int id);
     @GET("update/check")
     Observable<BaseResult<UpdateInfo>> getUpdateInfo();
+    @GET("app/patch")
+    Observable<BaseResult<PatchInfo>> getPatchInfo(@Query("version") String version);
     @GET
     Call<ResponseBody> downloadApk(@Url String apkUrl);
     @GET("role/list")
