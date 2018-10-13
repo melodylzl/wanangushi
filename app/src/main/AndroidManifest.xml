@@ -50,9 +50,9 @@
 
     <application
         android:name="com.byvoid.wanangushi.app.UtilsApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/app_icon"
-        tools:replace="android:icon"
+        tools:replace="android:icon,android:allowBackup"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
