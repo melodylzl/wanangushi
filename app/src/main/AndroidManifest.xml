@@ -91,6 +91,10 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait"/>
 
+        <service
+            android:name=".tinker.service.SampleResultService"
+            android:exported="false"/>
+
     </application>
 
 </manifest>
