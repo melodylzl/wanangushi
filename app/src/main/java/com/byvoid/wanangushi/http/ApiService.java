@@ -1,24 +1,21 @@
 package com.byvoid.wanangushi.http;
 
 import com.byvoid.wanangushi.base.BaseResponse;
+import com.byvoid.wanangushi.module.qiniu.model.UploadTokenResult;
+import com.byvoid.wanangushi.module.setting.model.UpdateInfo;
 import com.byvoid.wanangushi.module.story.model.Role;
 import com.byvoid.wanangushi.module.story.model.Story;
 import com.byvoid.wanangushi.module.story.model.StoryDetail;
-import com.byvoid.wanangushi.module.setting.model.UpdateInfo;
-import com.byvoid.wanangushi.module.qiniu.model.UploadTokenResult;
 import com.byvoid.wanangushi.tinker.model.PatchInfo;
 
 import java.util.List;
 
 import io.reactivex.Observable;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import retrofit2.http.Url;
 
 /**
  * @author melody
@@ -34,8 +31,6 @@ public interface ApiService {
     Observable<BaseResult<UpdateInfo>> getUpdateInfo();
     @GET("app/patch")
     Observable<BaseResult<PatchInfo>> getPatchInfo(@Query("version") String version);
-    @GET
-    Call<ResponseBody> downloadApk(@Url String apkUrl);
     @GET("role/list")
     Observable<BaseResult<List<Role>>> getRoleList(@Query("lastId") int lastId);
     @FormUrlEncoded

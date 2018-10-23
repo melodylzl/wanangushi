@@ -26,6 +26,7 @@ import android.support.multidex.MultiDex;
 import com.byvoid.wanangushi.tinker.Log.MyLogImp;
 import com.byvoid.wanangushi.tinker.util.SampleApplicationContext;
 import com.byvoid.wanangushi.tinker.util.TinkerManager;
+import com.liulishuo.filedownloader.FileDownloader;
 import com.meituan.android.walle.WalleChannelReader;
 import com.orhanobut.hawk.Hawk;
 import com.orhanobut.hawk.NoEncryption;
@@ -91,6 +92,7 @@ public class UtilsApplicationLike extends DefaultApplicationLike {
         initLogger();
         initUMeng();
         initHawk();
+        initDownloadManager();
     }
 
     /**
@@ -144,6 +146,10 @@ public class UtilsApplicationLike extends DefaultApplicationLike {
         Hawk.init(getApplication())
                 .setEncryption(new NoEncryption())
                 .build();
+    }
+
+    protected void initDownloadManager(){
+        FileDownloader.setup(getApplication());
     }
 
 
