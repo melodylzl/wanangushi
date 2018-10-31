@@ -73,6 +73,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         mActivity = (BaseActivity) getActivity();
         bindData();
         setListener();
+        getData();
         LogUtils.d(TAG, "onActivityCreated: ");
     }
 
@@ -100,9 +101,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     }
 
     protected void handleArguments(Bundle bundle){
-        if (bundle == null){
-            return;
-        }
+
     }
 
     protected void findView(View layout){
@@ -114,6 +113,10 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     }
 
     protected void setListener(){
+
+    }
+
+    protected void getData(){
 
     }
 
