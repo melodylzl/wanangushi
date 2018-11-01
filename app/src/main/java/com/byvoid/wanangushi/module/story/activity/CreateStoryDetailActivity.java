@@ -7,24 +7,23 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.byvoid.lib.utils.ToastUtils;
 import com.byvoid.wanangushi.R;
+import com.byvoid.wanangushi.base.BaseResponse;
 import com.byvoid.wanangushi.base.TakePhotoActivity;
 import com.byvoid.wanangushi.http.BaseCallBack;
 import com.byvoid.wanangushi.http.HttpService;
-import com.byvoid.wanangushi.base.BaseResponse;
+import com.byvoid.wanangushi.module.qiniu.QiniuUpload;
 import com.byvoid.wanangushi.module.story.model.Story;
 import com.byvoid.wanangushi.module.story.model.StoryTalk;
-import com.byvoid.wanangushi.module.qiniu.QiniuUpload;
 import com.byvoid.wanangushi.utils.DialogUtils;
 import com.byvoid.wanangushi.utils.LogUtils;
 import com.byvoid.wanangushi.utils.TakePhotoUtils;
-import com.byvoid.wanangushi.utils.ToastUtils;
 import com.google.gson.Gson;
 
 import org.devio.takephoto.model.TResult;

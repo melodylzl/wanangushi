@@ -3,10 +3,10 @@ package com.byvoid.wanangushi.module.story.adapter;
 import android.support.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
+import com.byvoid.lib.utils.SizeUtils;
+import com.byvoid.lib.utils.ViewUtils;
 import com.byvoid.wanangushi.R;
 import com.byvoid.wanangushi.module.story.model.Story;
-import com.byvoid.wanangushi.utils.SizeUtils;
-import com.byvoid.wanangushi.utils.ViewUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.makeramen.roundedimageview.RoundedImageView;

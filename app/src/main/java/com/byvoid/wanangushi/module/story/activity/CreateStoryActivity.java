@@ -10,33 +10,28 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethod;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.byvoid.lib.utils.InputMethodUtils;
+import com.byvoid.lib.utils.ListUtils;
+import com.byvoid.lib.utils.ToastUtils;
 import com.byvoid.wanangushi.R;
+import com.byvoid.wanangushi.base.TakePhotoActivity;
 import com.byvoid.wanangushi.module.story.adapter.RoleAdapter;
 import com.byvoid.wanangushi.module.story.adapter.StoryContentAdapter;
-import com.byvoid.wanangushi.base.TakePhotoActivity;
 import com.byvoid.wanangushi.module.story.model.Role;
 import com.byvoid.wanangushi.module.story.model.StoryTalk;
-import com.byvoid.wanangushi.utils.DialogUtils;
-import com.byvoid.wanangushi.utils.InputMethodUtils;
-import com.byvoid.wanangushi.utils.ListUtils;
 import com.byvoid.wanangushi.utils.TakePhotoUtils;
-import com.byvoid.wanangushi.utils.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import org.devio.takephoto.model.TResult;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 import butterknife.BindView;

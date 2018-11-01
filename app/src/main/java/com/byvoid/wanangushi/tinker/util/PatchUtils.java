@@ -3,7 +3,7 @@ package com.byvoid.wanangushi.tinker.util;
 import android.text.TextUtils;
 
 import com.byvoid.wanangushi.app.UtilsApplicationLike;
-import com.byvoid.wanangushi.constant.HawkConstants;
+import com.byvoid.wanangushi.utils.HawkConstants;
 import com.byvoid.wanangushi.http.BaseCallBack;
 import com.byvoid.wanangushi.http.HttpService;
 import com.byvoid.wanangushi.tinker.model.PatchInfo;

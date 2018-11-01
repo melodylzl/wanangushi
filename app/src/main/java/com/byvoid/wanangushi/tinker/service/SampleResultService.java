@@ -18,15 +18,13 @@ package com.byvoid.wanangushi.tinker.service;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.widget.Toast;
 
-import com.byvoid.wanangushi.constant.HawkConstants;
+import com.byvoid.wanangushi.utils.HawkConstants;
 import com.byvoid.wanangushi.tinker.util.Utils;
 import com.byvoid.wanangushi.utils.FileUtils;
 import com.orhanobut.hawk.Hawk;
 import com.tencent.tinker.lib.service.DefaultTinkerResultService;
 import com.tencent.tinker.lib.service.PatchResult;
-import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.util.TinkerLog;
 import com.tencent.tinker.lib.util.TinkerServiceInternals;
 

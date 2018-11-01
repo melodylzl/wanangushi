@@ -1,8 +1,8 @@
 package com.byvoid.wanangushi.module.setting.mvp;
 
+import com.byvoid.lib.utils.ToastUtils;
 import com.byvoid.wanangushi.base.IBaseCallBack;
 import com.byvoid.wanangushi.module.setting.model.UpdateInfo;
-import com.byvoid.wanangushi.utils.ToastUtils;
 
 /**
  * @author melody

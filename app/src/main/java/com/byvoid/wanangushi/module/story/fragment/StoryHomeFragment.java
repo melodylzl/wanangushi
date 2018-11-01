@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
+import com.byvoid.lib.utils.ListUtils;
 import com.byvoid.wanangushi.R;
 import com.byvoid.wanangushi.base.BasePullRecyclerViewFragment;
 import com.byvoid.wanangushi.base.LoadType;
@@ -13,7 +14,6 @@ import com.byvoid.wanangushi.module.story.adapter.StoryHomeAdapter;
 import com.byvoid.wanangushi.module.story.model.Story;
 import com.byvoid.wanangushi.module.story.mvp.IStoryHomeFragment;
 import com.byvoid.wanangushi.module.story.mvp.StoryHomePresenter;
-import com.byvoid.wanangushi.utils.ListUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;

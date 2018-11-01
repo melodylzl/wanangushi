@@ -1,8 +1,8 @@
 package com.byvoid.wanangushi.module.story.mvp;
 
-import com.byvoid.wanangushi.module.story.model.StoryDetail;
+import com.byvoid.lib.utils.ToastUtils;
 import com.byvoid.wanangushi.base.IBaseCallBack;
-import com.byvoid.wanangushi.utils.ToastUtils;
+import com.byvoid.wanangushi.module.story.model.StoryDetail;
 
 /**
  * @author melody

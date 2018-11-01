@@ -1,7 +1,6 @@
-package com.byvoid.wanangushi.constant;
+package com.byvoid.wanangushi.utils;
 
 import com.byvoid.wanangushi.BuildConfig;
-import com.byvoid.wanangushi.utils.ConfigUtils;
 
 /**
  * @author liuziliang

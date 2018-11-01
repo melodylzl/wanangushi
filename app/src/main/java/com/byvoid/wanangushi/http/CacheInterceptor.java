@@ -1,7 +1,6 @@
 package com.byvoid.wanangushi.http;
 
-import com.byvoid.wanangushi.constant.TimeConstants;
-import com.byvoid.wanangushi.utils.NetworkUtils;
+import com.byvoid.lib.utils.NetworkUtils;
 
 import java.io.IOException;
 

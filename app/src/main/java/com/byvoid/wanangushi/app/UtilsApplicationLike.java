@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.multidex.MultiDex;
 
+import com.byvoid.lib.AndroidLib;
 import com.byvoid.wanangushi.tinker.Log.MyLogImp;
 import com.byvoid.wanangushi.tinker.util.SampleApplicationContext;
 import com.byvoid.wanangushi.tinker.util.TinkerManager;
@@ -89,6 +90,7 @@ public class UtilsApplicationLike extends DefaultApplicationLike {
     public void onCreate() {
         super.onCreate();
         sInstance = this;
+        initAndroidLib();
         initLogger();
         initUMeng();
         initHawk();
@@ -130,6 +132,10 @@ public class UtilsApplicationLike extends DefaultApplicationLike {
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public void registerActivityLifecycleCallbacks(Application.ActivityLifecycleCallbacks callback) {
         getApplication().registerActivityLifecycleCallbacks(callback);
+    }
+
+    protected void initAndroidLib(){
+        AndroidLib.init(getApplication());
     }
 
     protected void initLogger(){
