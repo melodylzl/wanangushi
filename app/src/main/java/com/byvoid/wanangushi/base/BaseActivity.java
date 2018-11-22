@@ -7,7 +7,6 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.byvoid.wanangushi.utils.LogUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
@@ -62,7 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         try {
             handleOnClick(view);
         } catch (Throwable t) {
-            LogUtils.d(getClass().getSimpleName(),t);
+            t.printStackTrace();
         }
     }
 
